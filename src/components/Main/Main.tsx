@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles'
 
 // import LoginPage from '../../pages/Login/Login'
 
-import { FullAppBar, AppBarMobile } from '../FullAppBar/FullAppBar'
+import { AppBarWeb, AppBarMobile } from '../FullAppBar/FullAppBar'
 import NavigationBar from '../Navigation/NavigationBar'
 
 import UserContext from '../../shared/contexts/UserContext'
@@ -87,7 +87,7 @@ export default function Main({ children }: MainProps): JSX.Element {
         />
       )} */}
       {matches && (
-        <FullAppBar
+        <AppBarWeb
           title={'Special Spider App'}
           version={''}
           onLogout={handleLogout}

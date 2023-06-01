@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react'
 
-import FullAppBar, { FullAppBarProps } from './FullAppBar'
+import AppBarWeb, { AppBarWebProps } from './AppBarWeb'
 
-const renderComponent = (props: FullAppBarProps) =>
-  render(<FullAppBar {...props} />)
+const renderComponent = (props: AppBarWebProps) =>
+  render(<AppBarWeb {...props} />)
 
-describe('fullappbar component', () => {
+describe('AppBarWeb component', () => {
   it('should render all elements', () => {
-    const props: FullAppBarProps = {
+    const props: AppBarWebProps = {
       title: 'Super title',
       version: '1.2',
       onLogout: jest.fn(),

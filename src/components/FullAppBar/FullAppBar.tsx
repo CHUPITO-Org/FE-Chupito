@@ -45,7 +45,7 @@ const useStyles = makeStyles(() =>
   })
 )
 
-export interface FullAppBarProps {
+export interface AppBarWebProps {
   title: string
   version: string
   onLogout: () => void
@@ -55,11 +55,11 @@ export interface AppBarMobileProps {
   onLogout: () => void
 }
 
-export function FullAppBar({
+export function AppBarWeb({
   title,
   version,
   onLogout,
-}: FullAppBarProps): JSX.Element {
+}: AppBarWebProps): JSX.Element {
   const [openDrawer, setOpenDrawer] = useState(false)
   const classes = useStyles()
 
