@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 
-import { AppBarWeb, AppBarWebProps } from './FullAppBar'
+import AppBarWeb from './AppBarWeb'
+import { AppBarWebProps } from '../../types/types'
 
 const renderComponent = (props: AppBarWebProps) =>
   render(<AppBarWeb {...props} />)
@@ -19,6 +20,5 @@ describe('AppBarWeb component', () => {
     const version = screen.getByText(/v1.2/i)
     expect(version).toBeInTheDocument()
   })
-  // TODO: Add unit tests for AppBarWeb component
   // TODO: Add unit tests for AppBarWeb component
 })

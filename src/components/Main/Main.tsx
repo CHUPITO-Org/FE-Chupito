@@ -3,7 +3,8 @@ import { Paper, createStyles, makeStyles } from '@material-ui/core'
 import { useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { AppBarWeb, AppBarMobile } from '../FullAppBar/FullAppBar'
+import AppBarMobile from '../FullAppBar/AppBarMobile'
+import AppBarWeb from '../FullAppBar/AppBarWeb'
 import NavigationBar from '../Navigation/NavigationBar'
 import UserContext from '../../shared/contexts/UserContext'
 import LayoutContext, { LayoutTypes } from '../../shared/contexts/LayoutContext'
@@ -93,7 +94,7 @@ export default function Main({ children }: MainProps): JSX.Element {
           onLogout={handleLogout}
         />
       )}
-      {!matches && <AppBarMobile version={''} onLogout={handleLogout} />}
+      {!matches && <AppBarMobile version={''} />}
       {layout === LayoutTypes.NAVIGATION && (
         <NavigationBar title={title} showLogo={showLogo} />
       )}
