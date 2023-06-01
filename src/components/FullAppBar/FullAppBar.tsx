@@ -10,13 +10,28 @@ import {
 
 import MenuIcon from '@material-ui/icons/Menu'
 
+import SearchIcon from '@material-ui/icons/Search'
+
+import UserIcon from '@material-ui/icons/AccountCircle'
+
 import DrawerMenu from '../DrawerMenu/DrawerMenu'
+
+import SettingsIcon from '@material-ui/icons/Settings'
 
 import { colors } from '../../styles/theme/colors'
 
 const useStyles = makeStyles(() =>
   createStyles({
     hamburgerIcon: {
+      color: colors.white,
+    },
+    searchIcon: {
+      color: colors.white,
+    },
+    userIcon: {
+      color: colors.white,
+    },
+    settingsIcon: {
       color: colors.white,
     },
     appTitle: {},
@@ -35,8 +50,12 @@ export interface FullAppBarProps {
   version: string
   onLogout: () => void
 }
+export interface AppBarMobileProps {
+  version: string
+  onLogout: () => void
+}
 
-export default function FullAppBar({
+export function FullAppBar({
   title,
   version,
   onLogout,
@@ -67,5 +86,24 @@ export default function FullAppBar({
         onLogout={onLogout}
       />
     </>
+  )
+}
+export function AppBarMobile() {
+  const [openSettings, setOpenSettings] = useState(false)
+  const classes = useStyles()
+
+  const handleSettings = () => {
+    setOpenSettings(!openSettings)
+  }
+  return (
+    <AppBar>
+      <Toolbar>
+        <IconButton aria-label="Menu" onClick={handleSettings}>
+          <SearchIcon className={classes.searchIcon} />
+          <UserIcon className={classes.userIcon} />
+          <SettingsIcon className={classes.settingsIcon} />
+        </IconButton>
+      </Toolbar>
+    </AppBar>
   )
 }

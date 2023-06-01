@@ -1,9 +1,11 @@
 import { ReactNode, useContext } from 'react'
 import { Paper, createStyles, makeStyles } from '@material-ui/core'
+import { useMediaQuery } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 
 // import LoginPage from '../../pages/Login/Login'
 
-import FullAppBar from '../FullAppBar/FullAppBar'
+import { FullAppBar, AppBarMobile } from '../FullAppBar/FullAppBar'
 import NavigationBar from '../Navigation/NavigationBar'
 
 import UserContext from '../../shared/contexts/UserContext'
@@ -11,7 +13,7 @@ import LayoutContext, { LayoutTypes } from '../../shared/contexts/LayoutContext'
 
 import { Authentication } from '../../shared/api'
 
-import config from '../../environment/environment'
+// import config from '../../environment/environment'
 import { colors } from '../../styles/theme/colors'
 
 const useStyles = makeStyles((theme) =>
@@ -60,27 +62,38 @@ export default function Main({ children }: MainProps): JSX.Element {
   //     </Paper>
   //   )
   // }
+  const theme = useTheme()
+  const matches = useMediaQuery(theme.breakpoints.up('sm'))
 
   const handleLogout = () => {
     const api = Authentication()
-    api.logout()
-    .then(() => {
-      logout()
-    })
-    .catch((error) => {
-      console.error(error)
-    })
+    api
+      .logout()
+      .then(() => {
+        logout()
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
   return (
     <>
-      {layout === LayoutTypes.FULL && (
+      {/* {layout === LayoutTypes.FULL && (
         <FullAppBar
           title={title}
           version={config.version || ''}
           onLogout={handleLogout}
         />
+      )} */}
+      {matches && (
+        <FullAppBar
+          title={'Special Spider App'}
+          version={''}
+          onLogout={handleLogout}
+        />
       )}
+      {!matches && <AppBarMobile />}
       {layout === LayoutTypes.NAVIGATION && (
         <NavigationBar title={title} showLogo={showLogo} />
       )}
