@@ -3,18 +3,16 @@ import { Paper, createStyles, makeStyles } from '@material-ui/core'
 import { useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-// import LoginPage from '../../pages/Login/Login'
-
 import { AppBarWeb, AppBarMobile } from '../FullAppBar/FullAppBar'
 import NavigationBar from '../Navigation/NavigationBar'
-
 import UserContext from '../../shared/contexts/UserContext'
 import LayoutContext, { LayoutTypes } from '../../shared/contexts/LayoutContext'
-
 import { Authentication } from '../../shared/api'
-
-// import config from '../../environment/environment'
 import { colors } from '../../styles/theme/colors'
+// TODO: Return import,linked to LayoutTypes
+// import config from '../../environment/environment'
+// TODO: Implement route for Login
+// import LoginPage from '../../pages/Login/Login'
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -86,6 +84,8 @@ export default function Main({ children }: MainProps): JSX.Element {
           onLogout={handleLogout}
         />
       )} */}
+      {/* TODO: responsive logic should be inside LayoutTypes */}
+
       {matches && (
         <AppBarWeb
           title={'Special Spider App'}

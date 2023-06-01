@@ -7,47 +7,25 @@ import {
   makeStyles,
   createStyles,
 } from '@material-ui/core'
-
 import MenuIcon from '@material-ui/icons/Menu'
-
 import SearchIcon from '@material-ui/icons/Search'
-
 import UserIcon from '@material-ui/icons/AccountCircle'
-
-import DrawerMenu from '../DrawerMenu/DrawerMenu'
-
 import SettingsIcon from '@material-ui/icons/Settings'
 
+import DrawerMenu from '../DrawerMenu/DrawerMenu'
 import { colors } from '../../styles/theme/colors'
 
 const useStyles = makeStyles(() =>
   createStyles({
-    header: {
-      backgroundColor: 'transparent',
-      boxShadow: '0px 0px 0px 0px',
-      display: 'flex',
-    },
-    toolbar: {
-      justifyContent: 'space-evenly',
+    toolbarWeb: {
+      justifyContent: 'space-between',
     },
     hamburgerIcon: {
       color: colors.white,
     },
-    searchIcon: {
-      color: colors.black,
-    },
-    userIcon: {
-      color: colors.black,
-    },
     userWebIcon: {
       color: colors.white,
       justifyContent: 'end',
-    },
-    settingsIcon: {
-      color: colors.yellow,
-    },
-    toolbarWeb: {
-      justifyContent: 'space-between',
     },
     appTitle: {},
     version: {
@@ -57,9 +35,28 @@ const useStyles = makeStyles(() =>
       right: '1em',
       fontSize: 'xx-small',
     },
+    // TODO: Move component to a different file
+    header: {
+      backgroundColor: 'transparent',
+      boxShadow: '0px 0px 0px 0px',
+      display: 'flex',
+    },
+    toolbar: {
+      justifyContent: 'space-evenly',
+    },
+    searchIcon: {
+      color: colors.black,
+    },
+    userIcon: {
+      color: colors.black,
+    },
+    settingsIcon: {
+      color: colors.yellow,
+    },
   })
 )
 
+// TODO: Move types to a different file
 export interface AppBarWebProps {
   title: string
   version: string
@@ -81,6 +78,7 @@ export function AppBarWeb({
   const toggleDrawer = () => {
     setOpenDrawer(!openDrawer)
   }
+  // TODO: Add Login function
 
   return (
     <>
@@ -106,6 +104,8 @@ export function AppBarWeb({
     </>
   )
 }
+
+// TODO: Move AppBarMobile component to a different file
 export function AppBarMobile({ version, onLogout }: AppBarMobileProps) {
   const [openSettings, setOpenSettings] = useState(false)
   const classes = useStyles()
@@ -113,6 +113,7 @@ export function AppBarMobile({ version, onLogout }: AppBarMobileProps) {
   const handleSettings = () => {
     setOpenSettings(!openSettings)
   }
+  // TODO: Add handlers for search and settings icons
   return (
     <>
       <AppBar className={classes.header} position="fixed">
@@ -129,6 +130,7 @@ export function AppBarMobile({ version, onLogout }: AppBarMobileProps) {
           <label className={classes.version}>v{version}</label>
         </Toolbar>
       </AppBar>
+      {/* TODO: Replace Drawer for handlers */}
       <DrawerMenu
         open={openSettings}
         onClose={handleSettings}
@@ -137,3 +139,5 @@ export function AppBarMobile({ version, onLogout }: AppBarMobileProps) {
     </>
   )
 }
+// TODO: Add story file for AppBarMobile component
+// TODO: Add story file for AppBarWeb component
