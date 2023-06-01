@@ -93,7 +93,7 @@ export default function Main({ children }: MainProps): JSX.Element {
           onLogout={handleLogout}
         />
       )}
-      {!matches && <AppBarMobile />}
+      {!matches && <AppBarMobile version={''} onLogout={handleLogout} />}
       {layout === LayoutTypes.NAVIGATION && (
         <NavigationBar title={title} showLogo={showLogo} />
       )}

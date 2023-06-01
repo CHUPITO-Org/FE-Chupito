@@ -22,17 +22,25 @@ import { colors } from '../../styles/theme/colors'
 
 const useStyles = makeStyles(() =>
   createStyles({
+    header: {
+      backgroundColor: 'transparent',
+      boxShadow: '0px 0px 0px 0px',
+      display: 'flex',
+    },
+    toolbar: {
+      justifyContent: 'space-evenly',
+    },
     hamburgerIcon: {
       color: colors.white,
     },
     searchIcon: {
-      color: colors.white,
+      color: colors.black,
     },
     userIcon: {
-      color: colors.white,
+      color: colors.black,
     },
     settingsIcon: {
-      color: colors.white,
+      color: colors.yellow,
     },
     appTitle: {},
     version: {
@@ -88,7 +96,7 @@ export function AppBarWeb({
     </>
   )
 }
-export function AppBarMobile() {
+export function AppBarMobile({ version, onLogout }: AppBarMobileProps) {
   const [openSettings, setOpenSettings] = useState(false)
   const classes = useStyles()
 
@@ -96,14 +104,26 @@ export function AppBarMobile() {
     setOpenSettings(!openSettings)
   }
   return (
-    <AppBar>
-      <Toolbar>
-        <IconButton aria-label="Menu" onClick={handleSettings}>
-          <SearchIcon className={classes.searchIcon} />
-          <UserIcon className={classes.userIcon} />
-          <SettingsIcon className={classes.settingsIcon} />
-        </IconButton>
-      </Toolbar>
-    </AppBar>
+    <>
+      <AppBar className={classes.header} position="fixed">
+        <Toolbar className={classes.toolbar}>
+          <IconButton aria-label="Menu" onClick={handleSettings}>
+            <SearchIcon className={classes.searchIcon} />
+          </IconButton>
+          <IconButton>
+            <UserIcon className={classes.userIcon} />
+          </IconButton>
+          <IconButton>
+            <SettingsIcon className={classes.settingsIcon} />
+          </IconButton>
+          <label className={classes.version}>v{version}</label>
+        </Toolbar>
+      </AppBar>
+      <DrawerMenu
+        open={openSettings}
+        onClose={handleSettings}
+        onLogout={onLogout}
+      />
+    </>
   )
 }
