@@ -39,8 +39,15 @@ const useStyles = makeStyles(() =>
     userIcon: {
       color: colors.black,
     },
+    userWebIcon: {
+      color: colors.white,
+      justifyContent: 'end',
+    },
     settingsIcon: {
       color: colors.yellow,
+    },
+    toolbarWeb: {
+      justifyContent: 'space-between',
     },
     appTitle: {},
     version: {
@@ -78,13 +85,16 @@ export function AppBarWeb({
   return (
     <>
       <AppBar position="fixed">
-        <Toolbar>
+        <Toolbar className={classes.toolbarWeb}>
           <IconButton aria-label="Menu" onClick={toggleDrawer}>
             <MenuIcon className={classes.hamburgerIcon} />
           </IconButton>
           <Typography className={classes.appTitle} variant="h5">
             {title}
           </Typography>
+          <IconButton edge="end">
+            <UserIcon className={classes.userWebIcon} />
+          </IconButton>
           <label className={classes.version}>v{version}</label>
         </Toolbar>
       </AppBar>
