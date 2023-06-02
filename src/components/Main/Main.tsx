@@ -75,6 +75,19 @@ export default function Main({ children }: MainProps): JSX.Element {
         console.error(error)
       })
   }
+  const AppBarWebDisplay = () => {
+    return (
+      <AppBarWeb
+        title="Special Spider App"
+        version={''}
+        onLogout={handleLogout}
+      />
+    )
+  }
+
+  const AppBarMobileDisplay = () => {
+    return <AppBarMobile version={''} />
+  }
 
   return (
     <>
@@ -87,14 +100,8 @@ export default function Main({ children }: MainProps): JSX.Element {
       )} */}
       {/* TODO: responsive logic should be inside LayoutTypes */}
 
-      {matches && (
-        <AppBarWeb
-          title={'Special Spider App'}
-          version={''}
-          onLogout={handleLogout}
-        />
-      )}
-      {!matches && <AppBarMobile version={''} />}
+      {matches ? AppBarWebDisplay() : AppBarMobileDisplay()}
+
       {layout === LayoutTypes.NAVIGATION && (
         <NavigationBar title={title} showLogo={showLogo} />
       )}
