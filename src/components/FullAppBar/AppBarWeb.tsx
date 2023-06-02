@@ -34,11 +34,8 @@ const useStyles = makeStyles(() =>
       right: '1em',
       fontSize: 'xx-small',
     },
-    // TODO: Move component to a different file
   })
 )
-
-// TODO: Move types to a different file
 
 export default function AppBarWeb({
   title,
