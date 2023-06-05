@@ -1,15 +1,16 @@
-import { ReactNode, useContext } from 'react'
+import { useContext } from 'react'
 import { Paper, createStyles, makeStyles } from '@material-ui/core'
 import { useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import AppBarMobile from '../FullAppBar/AppBarMobile'
-import AppBarWeb from '../FullAppBar/AppBarWeb'
+import AppBarMobile from '../../components/AppBarMobile/AppBarMobile'
+import AppBarWeb from '../../components/AppBarWeb/AppBarWeb'
 import NavigationBar from '../Navigation/NavigationBar'
 import UserContext from '../../shared/contexts/UserContext'
 import LayoutContext, { LayoutTypes } from '../../shared/contexts/LayoutContext'
 import { Authentication } from '../../shared/api'
 import { colors } from '../../styles/theme/colors'
+import { MainProps } from '../../types/types'
 // TODO: Return import,linked to LayoutTypes
 // import config from '../../environment/environment'
 // TODO: Implement route for Login
@@ -41,11 +42,7 @@ const useStyles = makeStyles((theme) =>
   })
 )
 
-export interface MainProps {
-  children: ReactNode
-}
-
-export default function Main({ children }: MainProps): JSX.Element {
+export default function Main({ version }: MainProps): JSX.Element {
   // const { isLoggedIn, logout } = useContext(UserContext)
   const { logout } = useContext(UserContext)
   const { layout, title, showLogo } = useContext(LayoutContext)
@@ -62,7 +59,7 @@ export default function Main({ children }: MainProps): JSX.Element {
   //   )
   // }
   const theme = useTheme()
-  const matches = useMediaQuery(theme.breakpoints.up('sm'))
+  const matchesDesktopDisplay = useMediaQuery(theme.breakpoints.up('sm'))
 
   const handleLogout = () => {
     const api = Authentication()
@@ -87,7 +84,7 @@ export default function Main({ children }: MainProps): JSX.Element {
   }
 
   const AppBarMobileDisplay = () => {
-    return <AppBarMobile version={''} data-testid="mobile-app-bar" />
+    return <AppBarMobile version={''} />
   }
 
   return (
@@ -101,13 +98,13 @@ export default function Main({ children }: MainProps): JSX.Element {
       )} */}
       {/* TODO: return LayoutTypes for FullAppBar */}
 
-      {matches ? AppBarWebDisplay() : AppBarMobileDisplay()}
+      {matchesDesktopDisplay ? AppBarWebDisplay() : AppBarMobileDisplay()}
 
       {layout === LayoutTypes.NAVIGATION && (
         <NavigationBar title={title} showLogo={showLogo} />
       )}
       <Paper className={classes.mainContainer}>
-        <div className={classes.innerContainer}>{children}</div>
+        <div className={classes.innerContainer}>{version}</div>
       </Paper>
     </>
   )

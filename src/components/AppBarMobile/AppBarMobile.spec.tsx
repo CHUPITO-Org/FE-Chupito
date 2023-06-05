@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 
-import AppBarMobile from './AppBarMobile'
+import AppBarMobile from '../../components/AppBarMobile/AppBarMobile'
 import { AppBarMobileProps } from '../../types/types'
 
 const renderComponent = (props: AppBarMobileProps) =>

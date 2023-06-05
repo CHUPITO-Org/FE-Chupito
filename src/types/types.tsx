@@ -6,3 +6,6 @@ export interface AppBarWebProps {
 export interface AppBarMobileProps {
   version: string
 }
+export interface MainProps {
+  version: string
+}

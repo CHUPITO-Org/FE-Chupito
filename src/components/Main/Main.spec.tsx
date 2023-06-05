@@ -2,44 +2,27 @@ import { render, screen } from '@testing-library/react'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 import Main from './Main'
+import { MainProps } from '../../types/types'
 
 // TODO: Make a research to handle unit tests with context
 //describe('Main component', () => {
+const renderMainComponent = (props: MainProps) => render(<Main {...props} />)
 
 describe('with no authentication', () => {
   beforeEach(() => {
-    // Mock useMediaQuery for sm size
-    // useMediaQuery.mockImplementation((query) => {
-    //   if (query === '(sm)') {
-    //     return true
-    //   } else {
-    //     return false
-    //   }
-    // })
-    afterEach(() => {
-      // Reset the mock implementation after each test
-      // useMediaQuery.mockReset()
-    })
-    it('should render AppBarMobile header when device is mobile', () => {
-      jest.mock('@mui/material/useMediaQuery', () =>
+    it('should render AppBarWeb header when device is WEB', () => {
+      jest.mock('useMediaQuery', () =>
         jest.fn().mockImplementation((query) => {
-          // if (query === '(sm)') {
-          //   return true
-          // } else {
-          //   return false
-          // }
           return true
         })
       )
+      const props: MainProps = {
+        version: 'v14',
+      }
 
-      const { getByText } = render(
-        <Main>
-          {' '}
-          <div />
-        </Main>
-      )
-      const mobileAppBar = screen.getByText(/mobile-app-bar/)
-      expect(mobileAppBar).toBeInTheDocument()
+      renderMainComponent(props)
+      const webAppBarVersion = screen.getByText(/v14/)
+      expect(webAppBarVersion).toBeInTheDocument()
     })
     it('should redirect to login', () => {})
   })
