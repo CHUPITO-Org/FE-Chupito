@@ -75,6 +75,7 @@ export default function Main({ children }: MainProps): JSX.Element {
         console.error(error)
       })
   }
+  //TODO: Move AppBarWebDisplay and AppBarMobileDisplay to a component FullAppBar
   const AppBarWebDisplay = () => {
     return (
       <AppBarWeb
@@ -86,7 +87,7 @@ export default function Main({ children }: MainProps): JSX.Element {
   }
 
   const AppBarMobileDisplay = () => {
-    return <AppBarMobile version={''} />
+    return <AppBarMobile version={''} data-testid="mobile-app-bar" />
   }
 
   return (
@@ -98,7 +99,7 @@ export default function Main({ children }: MainProps): JSX.Element {
           onLogout={handleLogout}
         />
       )} */}
-      {/* TODO: responsive logic should be inside LayoutTypes */}
+      {/* TODO: return LayoutTypes for FullAppBar */}
 
       {matches ? AppBarWebDisplay() : AppBarMobileDisplay()}
 
