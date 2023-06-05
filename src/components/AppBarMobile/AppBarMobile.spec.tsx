@@ -16,5 +16,4 @@ describe('AppBarMobile component', () => {
     const version = screen.getByText(/v1.2/i)
     expect(version).toBeInTheDocument()
   })
-  // TODO: Add unit tests for AppBarMobile component
 })

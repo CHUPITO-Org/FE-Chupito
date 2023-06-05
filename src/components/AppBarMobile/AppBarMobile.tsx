@@ -67,12 +67,6 @@ export default function AppBarMobile({ version }: AppBarMobileProps) {
         </Toolbar>
       </AppBar>
       {/* TODO: Replace Drawer for handlers */}
-      {/*       <DrawerMenu
-        open={openSettings}
-        onClose={handleSettings}
-        onLogout={onLogout}
-      /> */}
     </>
   )
 }
-// TODO: Add story file for AppBarMobile component

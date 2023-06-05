@@ -74,4 +74,3 @@ export default function AppBarWeb({
     </>
   )
 }
-// TODO: Add story file for AppBarWeb component
