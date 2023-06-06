@@ -18,7 +18,6 @@ node_modules/
 .env.test
 .env.production
 .env
-conference.code-workspace
 
 npm-debug.log*
 yarn-debug.log*

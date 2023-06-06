@@ -41,17 +41,13 @@ export default function Main({ version }: MainProps): JSX.Element {
   const theme = useTheme()
   const matchesDesktopDisplay = useMediaQuery(theme.breakpoints.up('sm'))
 
-  const AppBarWebDisplay = () => {
-    return <AppBarWeb title="Special Spider App" version={''} />
-  }
-
-  const AppBarMobileDisplay = () => {
-    return <AppBarMobile version={''} />
-  }
-
   return (
     <>
-      {matchesDesktopDisplay ? AppBarWebDisplay() : AppBarMobileDisplay()}
+      {matchesDesktopDisplay ? (
+        <AppBarWeb title={'Special Spider App'} version={''} />
+      ) : (
+        <AppBarMobile version={''} />
+      )}
 
       {layout === LayoutTypes.NAVIGATION && (
         <NavigationBar title={title} showLogo={showLogo} />

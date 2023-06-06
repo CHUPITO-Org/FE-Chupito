@@ -11,7 +11,6 @@ describe('AppBarWeb component', () => {
     const props: AppBarWebProps = {
       title: 'Super title',
       version: '1.2',
-      onLogout: jest.fn(),
     }
     renderComponent(props)
     const title = screen.getByText(/super title/i)
