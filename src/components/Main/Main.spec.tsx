@@ -5,30 +5,30 @@ import Main from './Main'
 import { MainProps } from '../../types/types'
 
 // TODO: Make a research to handle unit tests with context
-//describe('Main component', () => {
 const renderMainComponent = (props: MainProps) => render(<Main {...props} />)
 
-describe('with no authentication', () => {
-  beforeEach(() => {
-    it('should render AppBarWeb header when device is WEB', () => {
-      jest.mock('useMediaQuery', () =>
-        jest.fn().mockImplementation((query) => {
-          return true
-        })
-      )
-      const props: MainProps = {
-        version: 'v14',
-      }
+describe('Main component', () => {
+  it('should render all elements', () => {
+    const props: MainProps = {
+      version: 'v14',
+    }
+    renderMainComponent(props)
+    const versionMain = screen.getByText(/v14/i)
+    expect(versionMain).toBeInTheDocument()
+  })
 
-      renderMainComponent(props)
-      const webAppBarVersion = screen.getByText(/v14/)
-      expect(webAppBarVersion).toBeInTheDocument()
-    })
-    it('should redirect to login', () => {})
+  it('should render AppBarWeb header when device is WEB', () => {
+    jest.mock('@mui/material/useMediaQuery', () =>
+      jest.fn().mockImplementation((query) => {
+        return true
+      })
+    )
+    const props: MainProps = {
+      version: 'v14',
+    }
+
+    renderMainComponent(props)
+    const webAppBarVersion = screen.getByText(/v14/)
+    expect(webAppBarVersion).toBeInTheDocument()
   })
 })
-
-describe('with authentication', () => {
-  it('should render all elements', () => {})
-})
-//})

@@ -6,21 +6,13 @@ import { useTheme } from '@mui/material/styles'
 import AppBarMobile from '../../components/AppBarMobile/AppBarMobile'
 import AppBarWeb from '../../components/AppBarWeb/AppBarWeb'
 import NavigationBar from '../Navigation/NavigationBar'
-import UserContext from '../../shared/contexts/UserContext'
 import LayoutContext, { LayoutTypes } from '../../shared/contexts/LayoutContext'
-import { Authentication } from '../../shared/api'
 import { colors } from '../../styles/theme/colors'
 import { MainProps } from '../../types/types'
-// TODO: Return import,linked to LayoutTypes
-// import config from '../../environment/environment'
-// TODO: Implement route for Login
-// import LoginPage from '../../pages/Login/Login'
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    mainContainer: {
-      // ...theme.mainContainer
-    },
+    mainContainer: {},
     innerContainer: {
       marginTop: '5em',
       marginBottom: '5em',
@@ -43,44 +35,14 @@ const useStyles = makeStyles((theme) =>
 )
 
 export default function Main({ version }: MainProps): JSX.Element {
-  // const { isLoggedIn, logout } = useContext(UserContext)
-  const { logout } = useContext(UserContext)
   const { layout, title, showLogo } = useContext(LayoutContext)
 
   const classes = useStyles()
-
-  // if (!isLoggedIn) {
-  //   return (
-  //     <Paper className={classes.mainContainer}>
-  //       <div className={classes.innerContainer}>
-  //         <LoginPage />
-  //       </div>
-  //     </Paper>
-  //   )
-  // }
   const theme = useTheme()
   const matchesDesktopDisplay = useMediaQuery(theme.breakpoints.up('sm'))
 
-  const handleLogout = () => {
-    const api = Authentication()
-    api
-      .logout()
-      .then(() => {
-        logout()
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-  }
-  //TODO: Move AppBarWebDisplay and AppBarMobileDisplay to a component FullAppBar
   const AppBarWebDisplay = () => {
-    return (
-      <AppBarWeb
-        title="Special Spider App"
-        version={''}
-        onLogout={handleLogout}
-      />
-    )
+    return <AppBarWeb title="Special Spider App" version={''} />
   }
 
   const AppBarMobileDisplay = () => {
@@ -89,15 +51,6 @@ export default function Main({ version }: MainProps): JSX.Element {
 
   return (
     <>
-      {/* {layout === LayoutTypes.FULL && (
-        <FullAppBar
-          title={title}
-          version={config.version || ''}
-          onLogout={handleLogout}
-        />
-      )} */}
-      {/* TODO: return LayoutTypes for FullAppBar */}
-
       {matchesDesktopDisplay ? AppBarWebDisplay() : AppBarMobileDisplay()}
 
       {layout === LayoutTypes.NAVIGATION && (

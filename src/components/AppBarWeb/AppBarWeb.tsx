@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   AppBar,
   IconButton,
@@ -9,8 +8,6 @@ import {
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import UserIcon from '@material-ui/icons/AccountCircle'
-
-import DrawerMenu from '../DrawerMenu/DrawerMenu'
 import { colors } from '../../styles/theme/colors'
 import { AppBarWebProps } from '../../types/types'
 
@@ -40,21 +37,16 @@ const useStyles = makeStyles(() =>
 export default function AppBarWeb({
   title,
   version,
-  onLogout,
 }: AppBarWebProps): JSX.Element {
-  const [openDrawer, setOpenDrawer] = useState(false)
   const classes = useStyles()
 
-  const toggleDrawer = () => {
-    setOpenDrawer(!openDrawer)
-  }
   // TODO: Add Login function
 
   return (
     <>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbarWeb}>
-          <IconButton aria-label="Menu" onClick={toggleDrawer}>
+          <IconButton aria-label="Menu">
             <MenuIcon className={classes.hamburgerIcon} />
           </IconButton>
           <Typography className={classes.appTitle} variant="h5">
@@ -66,11 +58,6 @@ export default function AppBarWeb({
           <label className={classes.version}>v{version}</label>
         </Toolbar>
       </AppBar>
-      <DrawerMenu
-        open={openDrawer}
-        onClose={toggleDrawer}
-        onLogout={onLogout}
-      />
     </>
   )
 }

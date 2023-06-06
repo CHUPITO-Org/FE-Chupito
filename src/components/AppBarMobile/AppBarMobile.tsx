@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   AppBar,
   IconButton,
@@ -43,18 +42,14 @@ const useStyles = makeStyles(() =>
   })
 )
 export default function AppBarMobile({ version }: AppBarMobileProps) {
-  const [openSettings, setOpenSettings] = useState(false)
   const classes = useStyles()
 
-  const handleSettings = () => {
-    setOpenSettings(!openSettings)
-  }
   // TODO: Add handlers for search and settings icons
   return (
     <>
       <AppBar className={classes.header} position="fixed">
         <Toolbar className={classes.toolbar}>
-          <IconButton aria-label="Menu" onClick={handleSettings}>
+          <IconButton aria-label="Menu">
             <SearchIcon className={classes.searchIcon} />
           </IconButton>
           <IconButton>
