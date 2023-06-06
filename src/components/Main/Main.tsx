@@ -58,7 +58,7 @@ export default function Main({ version, children }: MainProps): JSX.Element {
         <NavigationBar title={title} showLogo={showLogo} />
       )}
       <Paper className={classes.mainContainer}>
-        <div className={classes.innerContainer}>{version}</div>
+        <div className={classes.innerContainer}>{children}</div>
       </Paper>
     </>
   )
