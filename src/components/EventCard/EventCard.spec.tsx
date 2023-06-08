@@ -14,7 +14,6 @@ describe('event card component', () => {
         status: 'created',
         eventDate: '2021-10-10',
       },
-      onSelectedEvent: jest.fn(),
     }
     renderComponent(props)
     const conferenceName = screen.getByText(/conquering the world/i)

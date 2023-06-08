@@ -55,7 +55,6 @@ describe('events view component', () => {
         loadingEvents: false,
         loadingHeadquarters: false,
         isAdmin: false,
-        onSelectedEvent: jest.fn(),
       }
       renderComponent(props)
       const eventsTitle = screen.getByText(/events/i)
@@ -74,7 +73,6 @@ describe('events view component', () => {
         loadingEvents: false,
         loadingHeadquarters: false,
         isAdmin: false,
-        onSelectedEvent: jest.fn(),
       }
       renderComponent(props)
       const eventsTitle = screen.getByText(/events/i)
@@ -101,7 +99,6 @@ describe('events view component', () => {
         loadingEvents: false,
         loadingHeadquarters: false,
         isAdmin: false,
-        onSelectedEvent: jest.fn(),
       }
       renderComponent(props)
       const eventsTitle = screen.getByText(/events/i)
@@ -128,7 +125,7 @@ describe('events view component', () => {
       userEvent.click(filterByYearElement)
     })
 
-    it('should render 3 events and filterd by headquarter ', async () => {
+    it('should render 3 events and filtered by headquarter ', async () => {
       const mockEvents: Conference[] = [mockEvent01, mockEvent02, mockEvent03]
       const mockHeadquarters: Headquarter[] = [
         mockHeadquarter01,
@@ -140,7 +137,6 @@ describe('events view component', () => {
         loadingEvents: false,
         loadingHeadquarters: false,
         isAdmin: false,
-        onSelectedEvent: jest.fn(),
       }
       renderComponent(props)
       const eventsTitle = screen.getByText(/events/i)

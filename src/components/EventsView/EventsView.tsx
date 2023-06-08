@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { makeStyles, createStyles, Grid, Fab } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
+import { useMediaQuery } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 
 import FullLayout from '../../hocs/FullLayout'
 import EventList from '../EventList/EventList'
@@ -65,6 +67,8 @@ EventsViewProps): JSX.Element {
   const [allEvents] = useState<Conference[]>(events)
   const [filteredEvents, setFilteredEvents] = useState<Conference[]>(events)
   const classes = useStyles()
+  const theme = useTheme()
+  const matchesDesktopDisplay = useMediaQuery(theme.breakpoints.up('sm'))
 
   //const handleSelected = (event: Conference) => onSelectedEvent(event)
 
@@ -101,22 +105,26 @@ EventsViewProps): JSX.Element {
     <>
       {!loadingEvents && (
         <FullLayout title="Special Spider App">
-          <h1 className={classes.title}>Events</h1>
+          {matchesDesktopDisplay ? (
+            <h1 className={classes.title}>Events</h1>
+          ) : null}
           <Grid
             container
             justifyContent="center"
             className={classes.headquarterFilter}
           >
             {loadingEvents && <>Loading Headquarters...</>}
-            {!loadingEvents && (
+            {!loadingEvents && matchesDesktopDisplay ? (
               <Headquarters
                 onChangeHeadquarter={handleHeadquarterChanged}
                 allHeadquarters={allHeadquarters}
                 selectedHeadquarter={selectedHeadquarter}
                 loading={loadingHeadquarters}
               />
-            )}
-            <DashboardFilters onChangeFilters={handleChangeFilters} />
+            ) : null}
+            {matchesDesktopDisplay ? (
+              <DashboardFilters onChangeFilters={handleChangeFilters} />
+            ) : null}
           </Grid>
           <Grid container>
             <EventList
