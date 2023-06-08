@@ -65,18 +65,22 @@ const useStyles = makeStyles(() =>
       fontFamily: 'Exo',
       whiteSpace: 'nowrap',
       margin: 0,
+      marginRight: '1em',
+      textOverflow: 'ellipsis',
     },
     eventStatus: {
       display: 'flex',
-      justifyContent: 'end',
+      justifyContent: 'right',
     },
     userActionsSection: {
       display: 'flex',
       flexDirection: 'column',
-      right: '1em',
-      bottom: '3em',
+      marginTop: '1em',
+      marginRight: '1em',
+      marginLeft: '1em',
     },
     button: {
+      display: 'flex',
       position: 'relative',
       right: '0.5em',
       color: colors.white,
@@ -92,8 +96,6 @@ const useStyles = makeStyles(() =>
     },
     subscribersSection: {
       display: 'flex',
-      // right: '2em',
-      // bottom: '5em',
     },
     subscribedUserIcon: {
       color: colors.black,
@@ -108,7 +110,7 @@ const useStyles = makeStyles(() =>
     },
     text: {
       color: colors.black,
-      left: '0.8em',
+      left: '0.5em',
       bottom: '2em',
       position: 'relative',
     },
@@ -135,19 +137,18 @@ export default function EventCard({ event }: EventCardProps): JSX.Element {
   return (
     <Grid className={classes.cardGridItem} item xs={12} sm={5} md={4} lg={3}>
       <Card className={classes.card}>
-        <div>
-          <div className={classes.top}>
-            <div className={classes.titleSection}>
-              <h2 className={classes.title}>{event.name}</h2>
-            </div>
-            <div className={classes.eventStatus}>
-              <ConferenceStatusSection status={event.status} />
-            </div>
+        <div className={classes.top}>
+          <div className={classes.titleSection}>
+            <h2 className={classes.title}>{event.name}</h2>
           </div>
-          <div className={classes.date}>
-            <h3 className={classes.day}>{getDatePart(event.eventDate)}</h3>
+          <div className={classes.eventStatus}>
+            <ConferenceStatusSection status={event.status} />
           </div>
         </div>
+        <div className={classes.date}>
+          <h3 className={classes.day}>{getDatePart(event.eventDate)}</h3>
+        </div>
+
         <CardMedia
           className={classes.image}
           component="img"
