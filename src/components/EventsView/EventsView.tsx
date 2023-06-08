@@ -47,7 +47,7 @@ export interface EventsViewProps {
   // onOpen: () => void
   // onPause: () => void
   // onClose: () => void
-  onSelectedEvent: (event: Conference) => void
+  //onSelectedEvent: (event: Conference) => void
 }
 
 export default function EventsView({
@@ -57,16 +57,16 @@ export default function EventsView({
   loadingHeadquarters,
   isAdmin,
   selectedHeadquarter = '-1',
-  // onOpen,
-  // onPause,
-  // onClose,
-  onSelectedEvent,
-}: EventsViewProps): JSX.Element {
+}: // onOpen,
+// onPause,
+// onClose,
+//onSelectedEvent,
+EventsViewProps): JSX.Element {
   const [allEvents] = useState<Conference[]>(events)
   const [filteredEvents, setFilteredEvents] = useState<Conference[]>(events)
   const classes = useStyles()
 
-  const handleSelected = (event: Conference) => onSelectedEvent(event)
+  //const handleSelected = (event: Conference) => onSelectedEvent(event)
 
   const handleChangeFilters = (filters: ConferenceFilters) => {
     if (filters.sortBy) {
@@ -124,7 +124,7 @@ export default function EventsView({
               // onOpen={onOpen}
               // onPause={onPause}
               // onClose={onClose}
-              onSelected={handleSelected}
+              //onSelected={handleSelected}
             />
           </Grid>
           {/* <h1 className={classes.title}>Accounts</h1> */}
