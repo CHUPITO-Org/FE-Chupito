@@ -1,23 +1,23 @@
 import Moment from 'moment'
 import {
   Card,
-  CardActionArea,
+  CardActions,
   CardMedia,
   createStyles,
   Grid,
   makeStyles,
   Button,
   Link,
-  Fab,
   Typography,
+  Avatar,
+  Fab,
 } from '@material-ui/core'
-import AccountCircleIcon from '@material-ui/icons/AccountCircleRounded'
+import AddIcon from '@material-ui/icons/Add'
+//import { useNavigate } from 'react-router-dom'
 
 import ConferenceStatusSection from './ConferenceStatusSection'
 import { Conference } from '../../shared/entities'
 import { colors } from '../../styles/theme/colors'
-
-const eventImg = require('../../assets/programmingImg.png')
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -26,33 +26,20 @@ const useStyles = makeStyles(() =>
       height: '20em',
       overflow: 'hidden',
       backgroundColor: colors.transparentYellow,
-      display: 'flex',
     },
     cardGridItem: {
-      padding: '0.2em',
+      padding: '0.3em',
     },
     image: {
-      width: '100%',
-      height: '10em',
+      width: '95%',
       objectFit: 'cover',
-    },
-    location: {
-      backgroundColor: colors.dark,
-      paddingLeft: '0.5em',
-      paddingRight: '0.5em',
-      borderRadius: '5%',
-      color: colors.black,
-    },
-    locationName: {
+      borderRadius: '0.2em',
       marginTop: '1em',
-      marginBottom: '1em',
-      marginLeft: '0.5em',
-      marginRight: '0.5em',
+      marginRight: '1em',
+      marginLeft: '1em',
     },
     date: {
-      position: 'relative',
-      paddingTop: '0.3em',
-      paddingBottom: '0.3em',
+      paddingTop: '0.5em',
       paddingLeft: '1em',
       paddingRight: '1em',
     },
@@ -62,20 +49,31 @@ const useStyles = makeStyles(() =>
       margin: 0,
     },
     top: {
-      display: 'grid',
+      display: 'flex',
+      flexDirection: 'row',
       width: '100%',
       padding: '1em',
-      backgroundColor: colors.orangeTransparent,
+      backgroundColor: colors.black,
+      bottom: '20em',
     },
     title: {
       color: colors.white,
       fontFamily: 'Exo',
       whiteSpace: 'nowrap',
       margin: 0,
+      paddingRight: '2em',
+      display: 'flex',
+      justifyContent: 'start',
     },
     eventStatus: {
-      position: 'absolute',
+      display: 'flex',
+      justifyContent: 'end',
+    },
+    userActionsSection: {
+      display: 'flex',
+      flexDirection: 'column',
       right: '1em',
+      bottom: '3em',
     },
     button: {
       position: 'relative',
@@ -88,73 +86,56 @@ const useStyles = makeStyles(() =>
     link: {
       position: 'relative',
       top: '1.5em',
-      left: '16.5em',
+      left: '6.4em',
       color: colors.blue,
     },
-    suscribersSection: {
-      position: 'relative',
-      bottom: '2em',
-      left: '1em',
+    subscribersSection: {
       display: 'flex',
       flexDirection: 'row',
+      //justifyContent: 'start',
+      right: '2em',
+      bottom: '5em',
     },
-    suscribedUserIcon: {
-      position: 'relative',
-      //bottom: '2em',
-      //right: '3em',
+    subscribedUserIcon: {
       color: colors.black,
       backgroundColor: colors.white,
-      borderColor: colors.orange,
-      borderRadius: '50%',
+    },
+    subscribedUsersNumber: {
+      right: '1em',
     },
     text: {
       color: colors.black,
-      margin: '0.5em',
     },
   })
 )
 
-//type DateParts = 'day' | 'month'
-
 export interface EventCardProps {
   event: Conference
-  onSelectedEvent: (event: Conference) => void
+  //onSelectedEvent: (event: Conference) => void
 }
 
 export default function EventCard({
   event,
-  onSelectedEvent,
-}: EventCardProps): JSX.Element {
+}: //onSelectedEvent,
+EventCardProps): JSX.Element {
   const classes = useStyles()
-
-  const handleCardClicked = () => {
-    //     const {event, history, userContext, onSelectedEvent} = this.props;
-    //     const {isAdmin, role} = userContext.user;
-    //     if (isAdmin || role === 'Marketing') {
-    //       history.push(`/event/update/${event.id}`);
-    //       return;
-    //     }
-
-    //     if (!onSelectedEvent) {
-    //       return;
-    //     }
-    onSelectedEvent(event)
-  }
 
   const getDatePart = (date: string) => {
     const dateObject = Moment(date, 'YYYY-MM-DD')
     return dateObject.format('D MMM YYYY')
   }
 
-  /*   const image =
+  const url =
     event.images && event.images.length > 0
       ? event.images[0].url
-      : '/images/NoImage.png' */
+      : '/assets/programmingImg.png'
+
+  //let navigate = useNavigate()
 
   return (
     <Grid className={classes.cardGridItem} item xs={12} sm={5} md={4} lg={3}>
       <Card className={classes.card}>
-        <CardActionArea onClick={handleCardClicked}>
+        <div>
           <div className={classes.top}>
             <h2 className={classes.title}>{event.name}</h2>
             <div className={classes.eventStatus}>
@@ -164,33 +145,37 @@ export default function EventCard({
           <div className={classes.date}>
             <h3 className={classes.day}>{getDatePart(event.eventDate)}</h3>
           </div>
-          <CardMedia
-            className={classes.image}
-            component="img"
-            image={eventImg}
-            title={event.name}
-          />
-          <Button variant="contained" className={classes.button} href="#">
+        </div>
+        <CardMedia
+          className={classes.image}
+          component="img"
+          image={url}
+          height={80}
+          title={event.name}
+        />
+        <CardActions className={classes.userActionsSection}>
+          <Button
+            variant="contained"
+            className={classes.button}
+            //onClick={() => navigate('/Login')}
+          >
             {'Register'}
           </Button>
-          <Link underline="hover" className={classes.link} href="#">
+          <Link underline="always" className={classes.link} href="#">
             {'+more info '}
           </Link>
-          <div className={classes.suscribersSection}>
-            <Fab
-              size="medium"
-              aria-label="add"
-              className={classes.suscribedUserIcon}
-            >
-              <AccountCircleIcon />
-            </Fab>
-            <Typography className={classes.text} variant="h6">
-              {'Joined'}
-            </Typography>
-          </div>
-
-          <div className={classes.location}></div>
-        </CardActionArea>
+        </CardActions>
+        <div className={classes.subscribersSection}>
+          <Avatar
+            className={classes.subscribedUserIcon}
+            src={'/avatar.png'}
+          ></Avatar>
+          <Fab size="small" className={classes.subscribedUsersNumber}>
+            <AddIcon />
+            {+15}
+          </Fab>
+          <Typography className={classes.text}>{'Joined'}</Typography>
+        </div>
       </Card>
     </Grid>
   )
