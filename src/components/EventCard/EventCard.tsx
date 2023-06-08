@@ -1,20 +1,23 @@
-// import { withRouter } from 'react-router-dom'
 import Moment from 'moment'
 import {
   Card,
   CardActionArea,
-  // CardMedia,
+  CardMedia,
   createStyles,
   Grid,
   makeStyles,
+  Button,
+  Link,
+  Fab,
+  Typography,
 } from '@material-ui/core'
+import AccountCircleIcon from '@material-ui/icons/AccountCircleRounded'
 
 import ConferenceStatusSection from './ConferenceStatusSection'
-
-// import { withUserContext } from '../../hocs/UserContext'
 import { Conference } from '../../shared/entities'
-
 import { colors } from '../../styles/theme/colors'
+
+const eventImg = require('../../assets/programmingImg.png')
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -22,7 +25,7 @@ const useStyles = makeStyles(() =>
       width: '100%',
       height: '20em',
       overflow: 'hidden',
-      position: 'relative',
+      backgroundColor: colors.transparentYellow,
       display: 'flex',
     },
     cardGridItem: {
@@ -30,7 +33,7 @@ const useStyles = makeStyles(() =>
     },
     image: {
       width: '100%',
-      height: '20em',
+      height: '10em',
       objectFit: 'cover',
     },
     location: {
@@ -38,7 +41,7 @@ const useStyles = makeStyles(() =>
       paddingLeft: '0.5em',
       paddingRight: '0.5em',
       borderRadius: '5%',
-      color: colors.white,
+      color: colors.black,
     },
     locationName: {
       marginTop: '1em',
@@ -47,32 +50,22 @@ const useStyles = makeStyles(() =>
       marginRight: '0.5em',
     },
     date: {
-      position: 'absolute',
-      top: '1em',
-      right: '1em',
-      backgroundColor: colors.white,
-      paddingTop: '0.25em',
-      paddingBottom: '0.25em',
+      position: 'relative',
+      paddingTop: '0.3em',
+      paddingBottom: '0.3em',
       paddingLeft: '1em',
       paddingRight: '1em',
-      borderRadius: '5%',
     },
     day: {
       color: colors.orange,
       fontFamily: 'Exo',
       margin: 0,
-      textAlign: 'center',
     },
-    month: {
-      textTransform: 'uppercase',
-      fontFamily: 'Exo',
-      margin: 0,
-    },
-    bottom: {
+    top: {
       display: 'grid',
       width: '100%',
       padding: '1em',
-      backgroundColor: colors.transparentBlack,
+      backgroundColor: colors.orangeTransparent,
     },
     title: {
       color: colors.white,
@@ -82,12 +75,46 @@ const useStyles = makeStyles(() =>
     },
     eventStatus: {
       position: 'absolute',
+      right: '1em',
+    },
+    button: {
+      position: 'relative',
       right: '0.5em',
-    }
+      color: colors.white,
+      backgroundColor: colors.yellow,
+      marginLeft: '15em',
+      top: '0.5em',
+    },
+    link: {
+      position: 'relative',
+      top: '1.5em',
+      left: '16.5em',
+      color: colors.blue,
+    },
+    suscribersSection: {
+      position: 'relative',
+      bottom: '2em',
+      left: '1em',
+      display: 'flex',
+      flexDirection: 'row',
+    },
+    suscribedUserIcon: {
+      position: 'relative',
+      //bottom: '2em',
+      //right: '3em',
+      color: colors.black,
+      backgroundColor: colors.white,
+      borderColor: colors.orange,
+      borderRadius: '50%',
+    },
+    text: {
+      color: colors.black,
+      margin: '0.5em',
+    },
   })
 )
 
-type DateParts = 'day' | 'month'
+//type DateParts = 'day' | 'month'
 
 export interface EventCardProps {
   event: Conference
@@ -114,53 +141,55 @@ export default function EventCard({
     onSelectedEvent(event)
   }
 
-  const getDatePart = (date: string, part: DateParts) => {
+  const getDatePart = (date: string) => {
     const dateObject = Moment(date, 'YYYY-MM-DD')
-
-    if (part === 'day') {
-      return dateObject.format('D')
-    }
-
-    if (part === 'month') {
-      return dateObject.format('MMM')
-    }
-
     return dateObject.format('D MMM YYYY')
   }
 
-  //     const url = event.images && event.images.length > 0
-  //       ? event.images[0].url
-  //       : '/images/NoImage.png';
+  /*   const image =
+    event.images && event.images.length > 0
+      ? event.images[0].url
+      : '/images/NoImage.png' */
 
   return (
     <Grid className={classes.cardGridItem} item xs={12} sm={5} md={4} lg={3}>
       <Card className={classes.card}>
         <CardActionArea onClick={handleCardClicked}>
-          {/* <CardMedia
-          className={classes.image}
-          component="img"
-          image={
-            event.images && event.images.length > 0
-              ? event.images[0]?.url
-              : '/images/NoImage.png'
-          }
-          title={event.name}
-        /> */}
-          <div className={classes.location}></div>
-          <div className={classes.date}>
-            <h1 className={classes.day}>
-              {getDatePart(event.eventDate, 'day')}
-            </h1>
-            <h3 className={classes.month}>
-              {getDatePart(event.eventDate, 'month')}
-            </h3>
-          </div>
-          <div className={classes.bottom}>
+          <div className={classes.top}>
             <h2 className={classes.title}>{event.name}</h2>
             <div className={classes.eventStatus}>
               <ConferenceStatusSection status={event.status} />
-            </div>            
+            </div>
           </div>
+          <div className={classes.date}>
+            <h3 className={classes.day}>{getDatePart(event.eventDate)}</h3>
+          </div>
+          <CardMedia
+            className={classes.image}
+            component="img"
+            image={eventImg}
+            title={event.name}
+          />
+          <Button variant="contained" className={classes.button} href="#">
+            {'Register'}
+          </Button>
+          <Link underline="hover" className={classes.link} href="#">
+            {'+more info '}
+          </Link>
+          <div className={classes.suscribersSection}>
+            <Fab
+              size="medium"
+              aria-label="add"
+              className={classes.suscribedUserIcon}
+            >
+              <AccountCircleIcon />
+            </Fab>
+            <Typography className={classes.text} variant="h6">
+              {'Joined'}
+            </Typography>
+          </div>
+
+          <div className={classes.location}></div>
         </CardActionArea>
       </Card>
     </Grid>
