@@ -13,7 +13,6 @@ import {
   Fab,
 } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-//import { useNavigate } from 'react-router-dom'
 
 import ConferenceStatusSection from './ConferenceStatusSection'
 import { Conference } from '../../shared/entities'
@@ -56,14 +55,16 @@ const useStyles = makeStyles(() =>
       backgroundColor: colors.black,
       bottom: '20em',
     },
+    titleSection: {
+      display: 'flex',
+      justifyContent: 'start',
+      overflow: 'hidden',
+    },
     title: {
       color: colors.white,
       fontFamily: 'Exo',
       whiteSpace: 'nowrap',
       margin: 0,
-      paddingRight: '2em',
-      display: 'flex',
-      justifyContent: 'start',
     },
     eventStatus: {
       display: 'flex',
@@ -91,33 +92,34 @@ const useStyles = makeStyles(() =>
     },
     subscribersSection: {
       display: 'flex',
-      flexDirection: 'row',
-      //justifyContent: 'start',
-      right: '2em',
-      bottom: '5em',
+      // right: '2em',
+      // bottom: '5em',
     },
     subscribedUserIcon: {
       color: colors.black,
       backgroundColor: colors.white,
+      left: '0.8em',
+      bottom: '2em',
+      position: 'relative',
     },
     subscribedUsersNumber: {
-      right: '1em',
+      bottom: '3em',
+      position: 'relative',
     },
     text: {
       color: colors.black,
+      left: '0.8em',
+      bottom: '2em',
+      position: 'relative',
     },
   })
 )
 
 export interface EventCardProps {
   event: Conference
-  //onSelectedEvent: (event: Conference) => void
 }
 
-export default function EventCard({
-  event,
-}: //onSelectedEvent,
-EventCardProps): JSX.Element {
+export default function EventCard({ event }: EventCardProps): JSX.Element {
   const classes = useStyles()
 
   const getDatePart = (date: string) => {
@@ -130,14 +132,14 @@ EventCardProps): JSX.Element {
       ? event.images[0].url
       : '/assets/programmingImg.png'
 
-  //let navigate = useNavigate()
-
   return (
     <Grid className={classes.cardGridItem} item xs={12} sm={5} md={4} lg={3}>
       <Card className={classes.card}>
         <div>
           <div className={classes.top}>
-            <h2 className={classes.title}>{event.name}</h2>
+            <div className={classes.titleSection}>
+              <h2 className={classes.title}>{event.name}</h2>
+            </div>
             <div className={classes.eventStatus}>
               <ConferenceStatusSection status={event.status} />
             </div>
@@ -154,11 +156,7 @@ EventCardProps): JSX.Element {
           title={event.name}
         />
         <CardActions className={classes.userActionsSection}>
-          <Button
-            variant="contained"
-            className={classes.button}
-            //onClick={() => navigate('/Login')}
-          >
+          <Button variant="contained" className={classes.button}>
             {'Register'}
           </Button>
           <Link underline="always" className={classes.link} href="#">
@@ -174,7 +172,9 @@ EventCardProps): JSX.Element {
             <AddIcon />
             {+15}
           </Fab>
-          <Typography className={classes.text}>{'Joined'}</Typography>
+          <div className={classes.text}>
+            <Typography>{'Joined'}</Typography>
+          </div>
         </div>
       </Card>
     </Grid>
