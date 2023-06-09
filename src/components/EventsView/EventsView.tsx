@@ -46,10 +46,6 @@ export interface EventsViewProps {
   loadingHeadquarters: boolean
   isAdmin: boolean
   selectedHeadquarter?: string
-  // onOpen: () => void
-  // onPause: () => void
-  // onClose: () => void
-  //onSelectedEvent: (event: Conference) => void
 }
 
 export default function EventsView({
@@ -59,18 +55,12 @@ export default function EventsView({
   loadingHeadquarters,
   isAdmin,
   selectedHeadquarter = '-1',
-}: // onOpen,
-// onPause,
-// onClose,
-//onSelectedEvent,
-EventsViewProps): JSX.Element {
+}: EventsViewProps): JSX.Element {
   const [allEvents] = useState<Conference[]>(events)
   const [filteredEvents, setFilteredEvents] = useState<Conference[]>(events)
   const classes = useStyles()
   const theme = useTheme()
   const matchesDesktopDisplay = useMediaQuery(theme.breakpoints.up('sm'))
-
-  //const handleSelected = (event: Conference) => onSelectedEvent(event)
 
   const handleChangeFilters = (filters: ConferenceFilters) => {
     if (filters.sortBy) {
@@ -127,15 +117,8 @@ EventsViewProps): JSX.Element {
             ) : null}
           </Grid>
           <Grid container>
-            <EventList
-              events={filteredEvents}
-              // onOpen={onOpen}
-              // onPause={onPause}
-              // onClose={onClose}
-              //onSelected={handleSelected}
-            />
+            <EventList events={filteredEvents} />
           </Grid>
-          {/* <h1 className={classes.title}>Accounts</h1> */}
           {isAdmin && (
             <NavigationWrapper path="/event/add">
               <Fab className={classes.add} color="primary">
@@ -143,7 +126,6 @@ EventsViewProps): JSX.Element {
               </Fab>
             </NavigationWrapper>
           )}
-          {/*this.renderPreviewEvent()*/}
         </FullLayout>
       )}
     </>

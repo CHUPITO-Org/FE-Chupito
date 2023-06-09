@@ -17,6 +17,7 @@ import AddIcon from '@material-ui/icons/Add'
 import ConferenceStatusSection from './ConferenceStatusSection'
 import { Conference } from '../../shared/entities'
 import { colors } from '../../styles/theme/colors'
+import img from '../../assets/programmingImg.png'
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -30,10 +31,9 @@ const useStyles = makeStyles(() =>
       padding: '0.3em',
     },
     image: {
-      width: '95%',
+      width: '90%',
       objectFit: 'cover',
       borderRadius: '0.2em',
-      marginTop: '1em',
       marginRight: '1em',
       marginLeft: '1em',
     },
@@ -51,7 +51,7 @@ const useStyles = makeStyles(() =>
       display: 'flex',
       flexDirection: 'row',
       width: '100%',
-      padding: '1em',
+      padding: '0.7em',
       backgroundColor: colors.black,
       bottom: '20em',
     },
@@ -75,22 +75,18 @@ const useStyles = makeStyles(() =>
     userActionsSection: {
       display: 'flex',
       flexDirection: 'column',
-      marginTop: '1em',
       marginRight: '1em',
       marginLeft: '1em',
     },
     button: {
       display: 'flex',
       position: 'relative',
-      right: '0.5em',
       color: colors.white,
       backgroundColor: colors.yellow,
       marginLeft: '15em',
-      top: '0.5em',
     },
     link: {
       position: 'relative',
-      top: '1.5em',
       left: '6.4em',
       color: colors.blue,
     },
@@ -101,17 +97,17 @@ const useStyles = makeStyles(() =>
       color: colors.black,
       backgroundColor: colors.white,
       left: '0.8em',
-      bottom: '2em',
+      bottom: '3.2em',
       position: 'relative',
     },
     subscribedUsersNumber: {
-      bottom: '3em',
+      bottom: '4.5em',
       position: 'relative',
     },
     text: {
       color: colors.black,
       left: '0.5em',
-      bottom: '2em',
+      bottom: '3.5em',
       position: 'relative',
     },
   })
@@ -130,9 +126,7 @@ export default function EventCard({ event }: EventCardProps): JSX.Element {
   }
 
   const url =
-    event.images && event.images.length > 0
-      ? event.images[0].url
-      : '/assets/programmingImg.png'
+    event.images && event.images.length > 0 ? event.images[0].url : img
 
   return (
     <Grid className={classes.cardGridItem} item xs={12} sm={5} md={4} lg={3}>
@@ -153,7 +147,7 @@ export default function EventCard({ event }: EventCardProps): JSX.Element {
           className={classes.image}
           component="img"
           image={url}
-          height={80}
+          height={150}
           title={event.name}
         />
         <CardActions className={classes.userActionsSection}>
