@@ -11,6 +11,7 @@ import {
   Typography,
   Avatar,
   Fab,
+  Box,
 } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 
@@ -131,14 +132,14 @@ export default function EventCard({ event }: EventCardProps): JSX.Element {
   return (
     <Grid className={classes.cardGridItem} item xs={12} sm={5} md={4} lg={3}>
       <Card className={classes.card}>
-        <div className={classes.top}>
+        <Box className={classes.top}>
           <div className={classes.titleSection}>
             <h2 className={classes.title}>{event.name}</h2>
           </div>
           <div className={classes.eventStatus}>
             <ConferenceStatusSection status={event.status} />
           </div>
-        </div>
+        </Box>
         <div className={classes.date}>
           <h3 className={classes.day}>{getDatePart(event.eventDate)}</h3>
         </div>
