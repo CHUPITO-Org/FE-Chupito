@@ -3,6 +3,7 @@ import { BottomNavigation, BottomNavigationAction } from '@mui/material'
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import UserIcon from '@material-ui/icons/AccountCircle'
+import ExploreIcon from '@material-ui/icons/Explore'
 
 import { colors } from '../../styles/theme/colors'
 
@@ -22,12 +23,11 @@ const useStyles = makeStyles(() =>
       backgroundColor: colors.yellow,
       margin: '1em',
       marginLeft: '2.5em',
-      marginRight: '2.5em',
       borderRadius: '3em',
       fontSize: '11px',
       fontWeight: 'bold',
       height: '3em',
-      width: '8em',
+      width: '12em',
     },
   })
 )
@@ -43,7 +43,10 @@ export default function NavBarMobile({
   return (
     <>
       <BottomNavigation className={classes.bottomSection} value={value}>
-        <Button className={classes.button}>{'Discover'}</Button>
+        <Button className={classes.button}>
+          {<ExploreIcon />}
+          {'Discover'}
+        </Button>
         <BottomNavigationAction
           label="Calendar"
           value="calendar"
