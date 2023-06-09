@@ -32,7 +32,7 @@ const useStyles = makeStyles(() =>
   })
 )
 
-interface NavBarMobileProps {
+export interface NavBarMobileProps {
   value: string
 }
 export default function NavBarMobile({ value }: NavBarMobileProps) {
