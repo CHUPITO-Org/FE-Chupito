@@ -35,7 +35,9 @@ const useStyles = makeStyles(() =>
 export interface NavBarMobileProps {
   value: string
 }
-export default function NavBarMobile({ value }: NavBarMobileProps) {
+export default function NavBarMobile({
+  value,
+}: NavBarMobileProps): JSX.Element {
   const classes = useStyles()
 
   return (
