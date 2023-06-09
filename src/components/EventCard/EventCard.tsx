@@ -18,7 +18,7 @@ import AddIcon from '@material-ui/icons/Add'
 import ConferenceStatusSection from './ConferenceStatusSection'
 import { Conference } from '../../shared/entities'
 import { colors } from '../../styles/theme/colors'
-import img from '../../assets/programmingImg.png'
+import eventImage from '../../assets/programmingImg.png'
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -68,6 +68,7 @@ const useStyles = makeStyles(() =>
       margin: 0,
       marginRight: '1em',
       textOverflow: 'ellipsis',
+      fontWeight: 'bold',
     },
     eventStatus: {
       display: 'flex',
@@ -127,22 +128,26 @@ export default function EventCard({ event }: EventCardProps): JSX.Element {
   }
 
   const url =
-    event.images && event.images.length > 0 ? event.images[0].url : img
+    event.images && event.images.length > 0 ? event.images[0].url : eventImage
 
   return (
     <Grid className={classes.cardGridItem} item xs={12} sm={5} md={4} lg={3}>
       <Card className={classes.card}>
         <Box className={classes.top}>
-          <div className={classes.titleSection}>
-            <h2 className={classes.title}>{event.name}</h2>
-          </div>
-          <div className={classes.eventStatus}>
+          <Box className={classes.titleSection}>
+            <Typography variant="h5" className={classes.title}>
+              {event.name}
+            </Typography>
+          </Box>
+          <Box className={classes.eventStatus}>
             <ConferenceStatusSection status={event.status} />
-          </div>
+          </Box>
         </Box>
-        <div className={classes.date}>
-          <h3 className={classes.day}>{getDatePart(event.eventDate)}</h3>
-        </div>
+        <Box className={classes.date}>
+          <Typography variant="h6" className={classes.day}>
+            {getDatePart(event.eventDate)}
+          </Typography>
+        </Box>
 
         <CardMedia
           className={classes.image}
