@@ -68,6 +68,7 @@ export default function EventsPage(): JSX.Element {
     /* eslint-disable */
   }, [])
 
+
   if (loading) {
     return <>Loading events</>
   }

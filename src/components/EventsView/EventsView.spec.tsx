@@ -1,8 +1,8 @@
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 import { Conference, Headquarter } from '../../shared/entities'
-
 import EventsView, { EventsViewProps } from './EventsView'
 
 const renderComponent = (props: EventsViewProps) =>
@@ -166,6 +166,26 @@ describe('events view component', () => {
 
       expect(screen.queryByText(/event 02/i)).not.toBeInTheDocument()
       expect(screen.queryByText(/event 03/i)).not.toBeInTheDocument()
+    })
+    it('should render title  when device is WEB', () => {
+      jest.mock('@mui/material/useMediaQuery', () =>
+        jest.fn().mockImplementation((query) => {
+          return true
+        })
+      )
+      const mockEvents: Conference[] = [mockEvent01, mockEvent02, mockEvent03]
+      const mockHeadquarters: Headquarter[] = []
+      const props: EventsViewProps = {
+        events: mockEvents,
+        allHeadquarters: mockHeadquarters,
+        loadingEvents: false,
+        loadingHeadquarters: false,
+        isAdmin: false,
+      }
+
+      renderComponent(props)
+      const webEventsViewVersion = screen.getByText(/events/i)
+      expect(webEventsViewVersion).toBeInTheDocument()
     })
   })
 })
