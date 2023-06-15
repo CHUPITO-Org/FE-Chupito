@@ -6,6 +6,7 @@ import PlayEventPage from '../../pages/PlayEvent/PlayEvent'
 import UsersPage from '../../pages/Users/Users'
 import UserPage from '../../pages/User/User'
 import Login from '../../pages/Login/Login'
+import EventInfoPage from '../../pages/EventInfo/EventInfo'
 
 // Legacy
 // TODO: Insert 0auth path "/" when user is logged
@@ -17,10 +18,10 @@ export default function AppRoutes(): JSX.Element {
       <Route path="/">
         <EventsPage />
       </Route>
-      <Route path="/events">
-        <EventsPage />
+      <Route path="/event-info">
+        <EventInfoPage />
       </Route>
-      <Route path="login">
+      <Route path="/login">
         <Login />
       </Route>
       <Route path="/play-event/:id">
