@@ -1,4 +1,4 @@
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import EventsPage from '../../pages/Events/Events'
 import EventPage from '../../pages/Event/Event'
@@ -14,10 +14,7 @@ import EventInfoPage from '../../pages/EventInfo/EventInfo'
 
 export default function AppRoutes(): JSX.Element {
   return (
-    <>
-      <Route path="/">
-        <EventsPage />
-      </Route>
+    <Switch>
       <Route path="/event-info">
         <EventInfoPage />
       </Route>
@@ -36,6 +33,9 @@ export default function AppRoutes(): JSX.Element {
       <Route path="/user/add">
         <UserPage />
       </Route>
-    </>
+      <Route path="/">
+        <EventsPage />
+      </Route>
+    </Switch>
   )
 }

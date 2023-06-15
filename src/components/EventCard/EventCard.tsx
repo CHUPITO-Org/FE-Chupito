@@ -20,7 +20,6 @@ import ConferenceStatusSection from './ConferenceStatusSection'
 import { Conference } from '../../shared/entities'
 import { colors } from '../../styles/theme/colors'
 import eventImage from '../../assets/programmingImg.png'
-//import EventPage from '../../pages/Event/Event'
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -129,6 +128,7 @@ export default function EventCard({ event }: EventCardProps): JSX.Element {
     return dateObject.format('D MMM YYYY')
   }
   const history = useHistory()
+
   const handleLinkMoreInfo = () => {
     history.push('/event-info')
   }
