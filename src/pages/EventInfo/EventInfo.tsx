@@ -111,7 +111,6 @@ export default function EventInfoPage(): JSX.Element {
   const { isLoggedIn } = useContext(UserContext)
 
   const handleRegisterNavigation = () => {
-    isLoggedIn ? history.push('/login') : history.push('/')
     history.push(`${isLoggedIn ? 'login' : '/'}`)
   }
 
