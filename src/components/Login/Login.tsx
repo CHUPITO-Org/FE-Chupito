@@ -10,9 +10,7 @@ import {
 } from '@material-ui/core'
 
 import NoneLayout from '../../hocs/NoneLayout'
-
 import { validateEmail } from '../../tools'
-
 import { colors } from '../../styles/theme/colors'
 
 const useStyles = makeStyles((theme) =>

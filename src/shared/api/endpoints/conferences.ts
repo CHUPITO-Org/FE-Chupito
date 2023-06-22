@@ -1,6 +1,6 @@
 import { requests } from '../../../api/baseRequest'
 import { Conference } from './../../entities'
-import { config } from '../../../environment/environment'
+import config from '../../../environment/environment'
 
 function ConferenceAPI() {
   const getAll = async (): Promise<Conference[]> => {
