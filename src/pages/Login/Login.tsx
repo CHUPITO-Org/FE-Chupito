@@ -22,7 +22,7 @@ export default function LoginPage(): JSX.Element {
         })
 
         if (redirectURL && state) {
-          const completeURL = redirectURL + '?state=' + state + '&code='
+          const completeURL = `${redirectURL}?state=${state}&code=`
           window.location.href = completeURL
         }
       })
