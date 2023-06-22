@@ -16,7 +16,6 @@ export default function LoginPage(): JSX.Element {
     api
       .login({ email: userName, password })
       .then((result) => {
-        window.localStorage.setItem('userData', JSON.stringify(result.user))
         result.user.getIdToken().then((resultToken) => {
           setLoading(false)
           window.localStorage.setItem('token', JSON.stringify(resultToken))
