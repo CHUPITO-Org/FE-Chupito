@@ -178,6 +178,7 @@ export default function Login({ onLogin, loading }: LoginProps): JSX.Element {
               type="submit"
               variant="contained"
               onClick={handleLoginClicked}
+              data-testid={'login-button'}
             >
               Log In
             </Button>

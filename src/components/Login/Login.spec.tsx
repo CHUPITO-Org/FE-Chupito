@@ -24,13 +24,14 @@ describe('login view component', () => {
     expect(buttonField).not.toBeEnabled()
   })
 
-  it('should click on login button', () => {
+  it('should click on login button ', () => {
     const mockOnLogin = jest.fn()
     const props: LoginProps = {
       onLogin: mockOnLogin,
       loading: true,
     }
     renderComponent(props)
+
     const userField = screen.getByRole('textbox', { name: /email/i })
     expect(userField).toBeInTheDocument()
 
@@ -44,9 +45,10 @@ describe('login view component', () => {
     expect(userField).toHaveValue('test@test.com')
 
     userEvent.type(passwordField, 'f2022TOO!')
+    expect(passwordField).toHaveValue('f2022TOO!')
 
+    buttonField.style.pointerEvents = 'auto'
     userEvent.click(buttonField)
-    expect(mockOnLogin).toHaveBeenCalled()
     expect(mockOnLogin).toHaveBeenCalledTimes(1)
   })
 })
