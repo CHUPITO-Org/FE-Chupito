@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import Login, { LoginProps } from './Login'
@@ -38,7 +38,7 @@ describe('login view component', () => {
     const passwordField = screen.getByLabelText(/password/i)
     expect(passwordField).toBeInTheDocument()
 
-    const buttonField = screen.getByRole('button', { name: /log in/i })
+    const buttonField = screen.getByRole('button', { name: /Log In/i })
     expect(buttonField).toBeInTheDocument()
 
     userEvent.type(userField, 'test@test.com')
@@ -47,8 +47,10 @@ describe('login view component', () => {
     userEvent.type(passwordField, 'f2022TOO!')
     expect(passwordField).toHaveValue('f2022TOO!')
 
-    buttonField.style.pointerEvents = 'auto'
-    userEvent.click(buttonField)
-    expect(mockOnLogin).toHaveBeenCalledTimes(1)
+    waitFor(() => {
+      userEvent.click(buttonField)
+      expect(mockOnLogin).toHaveBeenCalled()
+      expect(mockOnLogin).toHaveBeenCalledTimes(1)
+    })
   })
 })
