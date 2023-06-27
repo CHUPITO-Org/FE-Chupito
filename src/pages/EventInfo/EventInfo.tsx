@@ -22,8 +22,6 @@ import image1 from '../../assets/image1.jpg'
 import image2 from '../../assets/image2.jpg'
 import image3 from '../../assets/image3.jpg'
 import UserContext from '../../shared/contexts/UserContext'
-//import { EventAPI } from '../../shared/api'
-//import { Conference } from '../../shared/entities'
 import EventsApi from '../../api/events'
 
 const imageItems = [
