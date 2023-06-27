@@ -1,4 +1,5 @@
 import { useHistory } from 'react-router-dom'
+import Moment from 'moment'
 import { useContext, useState, useEffect } from 'react'
 import {
   Typography,
@@ -113,6 +114,10 @@ export default function EventInfoPage(): JSX.Element {
   const [eventDetails, setEventDetails] = useState<any>({})
 
   const { isLoggedIn } = useContext(UserContext)
+  const getDatePart = (date: string) => {
+    const dateObject = Moment(date, 'YYYY-MM-DD')
+    return dateObject.format('D MMM YYYY')
+  }
 
   const handleRegisterNavigation = () => {
     history.push(`${isLoggedIn ? '/' : 'login'}`)
@@ -146,7 +151,7 @@ export default function EventInfoPage(): JSX.Element {
         </Grid>
         <Grid xs={6} md={4} className={classes.eventDateRow}>
           <Typography variant="h5" align="center">
-            {eventDetails?.eventDate}
+            {getDatePart(eventDetails?.eventDate)}
           </Typography>
           <Button
             variant="contained"
