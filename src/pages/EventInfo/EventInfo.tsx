@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import {
   Typography,
   Grid,
@@ -21,6 +21,9 @@ import image1 from '../../assets/image1.jpg'
 import image2 from '../../assets/image2.jpg'
 import image3 from '../../assets/image3.jpg'
 import UserContext from '../../shared/contexts/UserContext'
+//import { EventAPI } from '../../shared/api'
+//import { Conference } from '../../shared/entities'
+import EventsApi from '../../api/events'
 
 const imageItems = [
   {
@@ -107,6 +110,7 @@ const useStyles = makeStyles((theme) =>
 export default function EventInfoPage(): JSX.Element {
   const classes = useStyles()
   const history = useHistory()
+  const [eventDetails, setEventDetails] = useState<any>({})
 
   const { isLoggedIn } = useContext(UserContext)
 
@@ -114,19 +118,35 @@ export default function EventInfoPage(): JSX.Element {
     history.push(`${isLoggedIn ? '/' : 'login'}`)
   }
 
+  const fetchEventById = async (eventId: string) => {
+    const api = new EventsApi()
+    try {
+      const response = await api.getById(eventId)
+
+      const { id, name, eventDate } = response
+
+      setEventDetails({ id, name, eventDate })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    const id = window.location.pathname.split('/')[2]
+    fetchEventById(id)
+  }, [])
+
   return (
     <>
       <Grid className={classes.titleContainer}>
         <Grid xs={6} md={8} className={classes.eventTitleRow}>
           <Typography variant="h4" component="div">
-            {' '}
-            Event Title- Fluent React
+            {eventDetails?.name}
           </Typography>
         </Grid>
         <Grid xs={6} md={4} className={classes.eventDateRow}>
           <Typography variant="h5" align="center">
-            {' '}
-            June 19th, 2023
+            {eventDetails?.eventDate}
           </Typography>
           <Button
             variant="contained"
