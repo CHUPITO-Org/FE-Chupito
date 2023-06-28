@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import Moment from 'moment'
 import { useContext, useState, useEffect } from 'react'
 import {
@@ -23,6 +23,7 @@ import image2 from '../../assets/image2.jpg'
 import image3 from '../../assets/image3.jpg'
 import UserContext from '../../shared/contexts/UserContext'
 import EventsApi from '../../api/events'
+//import { Conference } from '../../shared/entities'
 
 const imageItems = [
   {
@@ -106,10 +107,22 @@ const useStyles = makeStyles((theme) =>
   })
 )
 
+export interface EventInfoPageProps {
+  name: string
+  id: string
+  eventDate: string
+}
+
 export default function EventInfoPage(): JSX.Element {
   const classes = useStyles()
   const history = useHistory()
-  const [eventDetails, setEventDetails] = useState<any>({})
+  const { id } = useParams<{ id: string }>() as { id: string }
+
+  const [eventDetails, setEventDetails] = useState<EventInfoPageProps>({
+    name: '',
+    id: '',
+    eventDate: '',
+  })
 
   const { isLoggedIn } = useContext(UserContext)
   const getDatePart = (date: string) => {
@@ -125,9 +138,7 @@ export default function EventInfoPage(): JSX.Element {
     const api = new EventsApi()
     try {
       const response = await api.getById(eventId)
-
       const { id, name, eventDate } = response
-
       setEventDetails({ id, name, eventDate })
     } catch (error) {
       console.log(error)
@@ -135,9 +146,8 @@ export default function EventInfoPage(): JSX.Element {
   }
 
   useEffect(() => {
-    const id = window.location.pathname.split('/')[2]
     fetchEventById(id)
-  }, [])
+  }, [id])
 
   return (
     <>
