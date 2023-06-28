@@ -130,7 +130,7 @@ export default function Login({ onLogin, loading }: LoginProps): JSX.Element {
   }
 
   const handleLoginClicked = () => {
-    onLogin(userName, password, () => history.push('/event-info'))
+    onLogin(userName, password, () => history.push('/event-info/:id'))
   }
 
   return (

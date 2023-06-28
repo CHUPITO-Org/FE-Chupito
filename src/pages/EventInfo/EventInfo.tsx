@@ -131,7 +131,7 @@ export default function EventInfoPage(): JSX.Element {
   }
 
   const handleRegisterNavigation = () => {
-    history.push(`${isLoggedIn ? '/' : 'login'}`)
+    history.push(`${isLoggedIn ? '/' : '/login'}`)
   }
 
   const fetchEventById = async (eventId: string) => {
