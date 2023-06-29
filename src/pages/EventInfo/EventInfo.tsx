@@ -23,7 +23,6 @@ import image2 from '../../assets/image2.jpg'
 import image3 from '../../assets/image3.jpg'
 import UserContext from '../../shared/contexts/UserContext'
 import EventsApi from '../../api/events'
-//import { Conference } from '../../shared/entities'
 
 const imageItems = [
   {
@@ -131,7 +130,7 @@ export default function EventInfoPage(): JSX.Element {
   }
 
   const handleRegisterNavigation = () => {
-    history.push(`${isLoggedIn ? '/' : '/login'}`)
+    history.push(`${isLoggedIn ? '/' : `/login/${id}`}`)
   }
 
   const fetchEventById = async (eventId: string) => {

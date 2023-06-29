@@ -18,7 +18,7 @@ export default function AppRoutes(): JSX.Element {
       <Route path="/event-info/:id">
         <EventInfoPage />
       </Route>
-      <Route path="/login">
+      <Route path="/login/:id?">
         <Login />
       </Route>
       <Route path="/play-event/:id">
