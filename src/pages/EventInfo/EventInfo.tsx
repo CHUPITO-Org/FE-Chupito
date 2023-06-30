@@ -1,4 +1,4 @@
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import Moment from 'moment'
 import { useContext, useState, useEffect } from 'react'
 import {
@@ -122,15 +122,18 @@ export default function EventInfoPage(): JSX.Element {
     id: '',
     eventDate: '',
   })
+  const [isUserRegistered, setIsUserRegistered] = useState(false)
 
-  const { isLoggedIn, isSubscribed } = useContext(UserContext)
+  const { isLoggedIn } = useContext(UserContext)
   const getDatePart = (date: string) => {
     const dateObject = Moment(date, 'YYYY-MM-DD')
     return dateObject.format('D MMM YYYY')
   }
-
-  const handleRegisterNavigation = () => {
-    history.push(`${isLoggedIn ? '/' : `/login?eventId=$/${id}`}`)
+  const RegisterNavigation = () => {
+    console.log('user state', isUserRegistered)
+    setIsUserRegistered(true)
+    console.log('user state UPDATED', isUserRegistered)
+    history.push(`${isLoggedIn ? '/event-info' : `/login?eventId=${id}`}`)
   }
 
   const fetchEventById = async (eventId: string) => {
@@ -163,11 +166,11 @@ export default function EventInfoPage(): JSX.Element {
           <Button
             variant="contained"
             className={classes.button}
-            onClick={handleRegisterNavigation}
+            onClick={RegisterNavigation}
             data-testid="register-button"
           >
             {' '}
-            {isLoggedIn && isSubscribed ? 'Subscribed' : 'Register'}
+            {isUserRegistered ? 'Subscribed' : 'Register'}
           </Button>
         </Grid>
       </Grid>

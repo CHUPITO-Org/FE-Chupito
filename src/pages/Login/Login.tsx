@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
 
 import Login from '../../components/Login/Login'
 import { Authentication } from '../../shared/api'
@@ -9,7 +8,8 @@ export default function LoginPage(): JSX.Element {
   const [loading, setLoading] = useState(false)
   const [state] = useState('')
   const [redirectURL] = useState(null)
-  const { id } = useParams<{ id: string }>() as { id: string }
+  const params = new URLSearchParams(window.location.search)
+  const eventId = params.get('eventId')
 
   const api = Authentication()
 
@@ -31,7 +31,7 @@ export default function LoginPage(): JSX.Element {
         window.location.href = completeURL
       }
       const eventsApi = new EventsApi()
-      eventsApi.addAttendees(id, { email: userName, password })
+      eventsApi.addAttendees(eventId, { email: userName, password })
     } catch (err) {
       console.error(err)
     }

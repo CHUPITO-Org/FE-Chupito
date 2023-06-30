@@ -16,7 +16,7 @@ interface ContextProps {
   isSubscribed?: boolean
 }
 
-const defaultState = {
+let defaultState = {
   isLoggedIn: false,
   defaultLocation: null,
   user: null,
@@ -31,7 +31,6 @@ if (window.localStorage.getItem('userData')) {
     window.localStorage.getItem('userData') || ''
   )
   defaultState.isLoggedIn = true
-  defaultState.isSubscribed = true
   defaultState.user = previousLoggin
 }
 
@@ -58,8 +57,11 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     }
     setUser(userData)
     window.localStorage.setItem('userData', JSON.stringify(userData))
-    setIsSubscribed(true)
   }
+  //TODO: Validate from back user is registered
+  // const isSubscribed = ()=>{
+  //   setIsSubscribed(true)
+  // }
 
   const setLocation = (location: string) => {
     setDefaultLocation(location)
