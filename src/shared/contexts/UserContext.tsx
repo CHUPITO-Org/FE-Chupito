@@ -13,6 +13,7 @@ interface ContextProps {
   ) => void
   setLocation: (location: string) => void
   logout: () => void
+  isSubscribed?: boolean
 }
 
 const defaultState = {
@@ -22,6 +23,7 @@ const defaultState = {
   login: () => {},
   setLocation: () => {},
   logout: () => {},
+  isSubscribed: false,
 }
 
 if (window.localStorage.getItem('userData')) {
@@ -29,6 +31,7 @@ if (window.localStorage.getItem('userData')) {
     window.localStorage.getItem('userData') || ''
   )
   defaultState.isLoggedIn = true
+  defaultState.isSubscribed = true
   defaultState.user = previousLoggin
 }
 
@@ -40,6 +43,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
   const [defaultLocation, setDefaultLocation] = useState<string | null>(
     defaultState.defaultLocation
   )
+  const [isSubscribed, setIsSubscribed] = useState(defaultState.isSubscribed)
 
   const login = (
     user: UserInApp,
@@ -54,6 +58,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     }
     setUser(userData)
     window.localStorage.setItem('userData', JSON.stringify(userData))
+    setIsSubscribed(true)
   }
 
   const setLocation = (location: string) => {
@@ -64,6 +69,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     window.localStorage.removeItem('userData')
     setIsLoggedIn(false)
     setUser(null)
+    setIsSubscribed(false)
   }
 
   return (
@@ -75,6 +81,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
         login,
         setLocation,
         logout,
+        isSubscribed,
       }}
     >
       {children}

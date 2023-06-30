@@ -13,38 +13,28 @@ export default function LoginPage(): JSX.Element {
 
   const api = Authentication()
 
-  const handleLoginClicked = (
+  const handleLoginClicked = async (
     userName: string,
     password: string,
     callback: () => void
   ) => {
     setLoading(true)
-    //TODO: Refactor async y await
-    api
-      .login({ email: userName, password })
-      .then((result) => {
-        result.user.getIdToken().then((resultToken) => {
-          setLoading(false)
-          window.localStorage.setItem('token', JSON.stringify(resultToken))
-          callback()
-        })
+    try {
+      const result = await api.login({ email: userName, password })
+      const resultToken = await result.user.getIdToken()
+      setLoading(false)
+      window.localStorage.setItem('token', JSON.stringify(resultToken))
+      callback()
 
-        if (redirectURL && state) {
-          const completeURL = `${redirectURL}?state=${state}&code=`
-          window.location.href = completeURL
-        }
-      })
-      .then(() => {
-        const eventsApi = new EventsApi()
-
-        eventsApi.addAttendees(id, { email: userName, password })
-        console.log('OUTSIDE EVENT PROMISE', id)
-        console.log('OUTSIDE PROMISE/ ATTENDEES', userName)
-        console.log('OUTSIDE PROMISE/ PASSWORD', password)
-      })
-      .catch((err) => {
-        console.error(err)
-      })
+      if (redirectURL && state) {
+        const completeURL = `${redirectURL}?state=${state}&code=`
+        window.location.href = completeURL
+      }
+      const eventsApi = new EventsApi()
+      eventsApi.addAttendees(id, { email: userName, password })
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return <Login onLogin={handleLoginClicked} loading={loading} />

@@ -123,14 +123,14 @@ export default function EventInfoPage(): JSX.Element {
     eventDate: '',
   })
 
-  const { isLoggedIn } = useContext(UserContext)
+  const { isLoggedIn, isSubscribed } = useContext(UserContext)
   const getDatePart = (date: string) => {
     const dateObject = Moment(date, 'YYYY-MM-DD')
     return dateObject.format('D MMM YYYY')
   }
 
   const handleRegisterNavigation = () => {
-    history.push(`${isLoggedIn ? '/' : `/login/${id}`}`)
+    history.push(`${isLoggedIn ? '/' : `/login?eventId=$/${id}`}`)
   }
 
   const fetchEventById = async (eventId: string) => {
@@ -167,7 +167,7 @@ export default function EventInfoPage(): JSX.Element {
             data-testid="register-button"
           >
             {' '}
-            {'Register'}
+            {isLoggedIn && isSubscribed ? 'Subscribed' : 'Register'}
           </Button>
         </Grid>
       </Grid>
