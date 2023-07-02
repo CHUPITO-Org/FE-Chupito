@@ -13,7 +13,6 @@ interface ContextProps {
   ) => void
   setLocation: (location: string) => void
   logout: () => void
-  isSubscribed?: boolean
 }
 
 let defaultState = {
@@ -23,7 +22,6 @@ let defaultState = {
   login: () => {},
   setLocation: () => {},
   logout: () => {},
-  isSubscribed: false,
 }
 
 if (window.localStorage.getItem('userData')) {
@@ -42,7 +40,6 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
   const [defaultLocation, setDefaultLocation] = useState<string | null>(
     defaultState.defaultLocation
   )
-  const [isSubscribed, setIsSubscribed] = useState(defaultState.isSubscribed)
 
   const login = (
     user: UserInApp,
@@ -57,11 +54,8 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     }
     setUser(userData)
     window.localStorage.setItem('userData', JSON.stringify(userData))
+    console.log(userData)
   }
-  //TODO: Validate from back user is registered
-  // const isSubscribed = ()=>{
-  //   setIsSubscribed(true)
-  // }
 
   const setLocation = (location: string) => {
     setDefaultLocation(location)
@@ -71,7 +65,6 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     window.localStorage.removeItem('userData')
     setIsLoggedIn(false)
     setUser(null)
-    setIsSubscribed(false)
   }
 
   return (
@@ -83,7 +76,6 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
         login,
         setLocation,
         logout,
-        isSubscribed,
       }}
     >
       {children}

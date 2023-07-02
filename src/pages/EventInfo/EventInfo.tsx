@@ -122,18 +122,18 @@ export default function EventInfoPage(): JSX.Element {
     id: '',
     eventDate: '',
   })
-  const [isUserRegistered, setIsUserRegistered] = useState(false)
+  //const [isUserRegistered, setIsUserRegistered] = useState(false)
 
-  const { isLoggedIn } = useContext(UserContext)
+  const { user, login } = useContext(UserContext)
   const getDatePart = (date: string) => {
     const dateObject = Moment(date, 'YYYY-MM-DD')
     return dateObject.format('D MMM YYYY')
   }
-  const RegisterNavigation = () => {
-    console.log('user state', isUserRegistered)
-    setIsUserRegistered(true)
-    console.log('user state UPDATED', isUserRegistered)
-    history.push(`${isLoggedIn ? '/event-info' : `/login?eventId=${id}`}`)
+  const subscribedValidationHandler = () => {
+    console.log(user)
+    //setIsUserRegistered(true)
+    history.push(`${user ? '/event-info' : `/login?eventId=${id}`}`)
+    console.log(login)
   }
 
   const fetchEventById = async (eventId: string) => {
@@ -166,11 +166,11 @@ export default function EventInfoPage(): JSX.Element {
           <Button
             variant="contained"
             className={classes.button}
-            onClick={RegisterNavigation}
+            onClick={subscribedValidationHandler}
             data-testid="register-button"
           >
             {' '}
-            {isUserRegistered ? 'Subscribed' : 'Register'}
+            {user ? 'Subscribed' : 'Register'}
           </Button>
         </Grid>
       </Grid>
