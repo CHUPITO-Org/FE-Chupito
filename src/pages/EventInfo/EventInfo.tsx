@@ -122,18 +122,14 @@ export default function EventInfoPage(): JSX.Element {
     id: '',
     eventDate: '',
   })
-  //const [isUserRegistered, setIsUserRegistered] = useState(false)
 
-  const { user, login } = useContext(UserContext)
+  const { isLoggedIn } = useContext(UserContext)
   const getDatePart = (date: string) => {
     const dateObject = Moment(date, 'YYYY-MM-DD')
     return dateObject.format('D MMM YYYY')
   }
   const subscribedValidationHandler = () => {
-    console.log(user)
-    //setIsUserRegistered(true)
-    history.push(`${user ? '/event-info' : `/login?eventId=${id}`}`)
-    console.log(login)
+    history.push(`${isLoggedIn ? '/event-info' : `/login?eventId=${id}`}`)
   }
 
   const fetchEventById = async (eventId: string) => {
@@ -170,7 +166,7 @@ export default function EventInfoPage(): JSX.Element {
             data-testid="register-button"
           >
             {' '}
-            {user ? 'Subscribed' : 'Register'}
+            {isLoggedIn ? 'Subscribed' : 'Register'}
           </Button>
         </Grid>
       </Grid>
