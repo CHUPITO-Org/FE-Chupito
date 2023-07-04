@@ -21,7 +21,7 @@ import eventImage from '../../assets/programmingImg.png'
 import image1 from '../../assets/image1.jpg'
 import image2 from '../../assets/image2.jpg'
 import image3 from '../../assets/image3.jpg'
-import UserContext from '../../shared/contexts/UserContext'
+import { AuthContext } from '../../contexts/Auth/AuthContext'
 import EventsApi from '../../api/events'
 
 const imageItems = [
@@ -123,13 +123,14 @@ export default function EventInfoPage(): JSX.Element {
     eventDate: '',
   })
 
-  const { isLoggedIn } = useContext(UserContext)
+  const { state, verifyUser } = useContext(AuthContext)
+
   const getDatePart = (date: string) => {
     const dateObject = Moment(date, 'YYYY-MM-DD')
     return dateObject.format('D MMM YYYY')
   }
   const subscribedValidationHandler = () => {
-    history.push(`${isLoggedIn ? '/event-info' : `/login?eventId=${id}`}`)
+    history.push(`${state.isAuth ? '/event-info' : `/login?eventId=${id}`}`)
   }
 
   const fetchEventById = async (eventId: string) => {
@@ -142,6 +143,9 @@ export default function EventInfoPage(): JSX.Element {
       console.log(error)
     }
   }
+  useEffect(() => {
+    verifyUser()
+  }, [])
 
   useEffect(() => {
     fetchEventById(id)
@@ -162,27 +166,21 @@ export default function EventInfoPage(): JSX.Element {
           <Button
             variant="contained"
             className={classes.button}
+            disabled={state.isAuth}
             onClick={subscribedValidationHandler}
             data-testid="register-button"
           >
             {' '}
-            {isLoggedIn ? 'Subscribed' : 'Register'}
+            {state.isAuth ? 'Subscribed' : 'Register'}
           </Button>
         </Grid>
       </Grid>
       <Grid className={classes.body}>
         <Grid>
-          <Typography variant="body1" className={classes.description}>
-            {' '}
-            Join expert John Smith to take a deep dive into concepts of React,
-            including JSX syntax and advanced patterns. By becoming fluent in
-            React, you’ll quickly learn how to build better web applications.
-            For example, how many of us truly understand how React makes updates
-            to user interfaces with fiber reconciliation? How many of us know
-            when to memoize and when not to? You’ll deep dive into React’s
-            internals and best practices like these to help you work more
-            confidently with React.{' '}
-          </Typography>
+          <Typography
+            variant="body1"
+            className={classes.description}
+          ></Typography>
         </Grid>
         <Grid className={classes.subscribersSection}>
           <Avatar

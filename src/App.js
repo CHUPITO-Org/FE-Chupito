@@ -4,24 +4,23 @@ import Main from './components/Main/Main'
 import ThemeProvider from './providers/ThemeProvider'
 import AppRoutes from './components/AppRoutes/AppRoutes'
 import { LayoutProvider, UserProvider } from './shared/contexts'
-// import store from './redux/store'
-// import { Provider } from 'react-redux'
+import { AuthProvider } from './contexts/Auth/AuthProvider'
 
 function App() {
   return (
-    // <Provider store={store}>
     <BrowserRouter>
       <ThemeProvider>
         <UserProvider>
           <LayoutProvider>
-            <Main>
-              <AppRoutes />
-            </Main>
+            <AuthProvider>
+              <Main>
+                <AppRoutes />
+              </Main>
+            </AuthProvider>
           </LayoutProvider>
         </UserProvider>
       </ThemeProvider>
     </BrowserRouter>
-    // </Provider> */>
   )
 }
 

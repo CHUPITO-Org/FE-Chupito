@@ -1,9 +1,4 @@
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 
 import getFirebaseApp from '../backends/firebase'
 import { Credentials } from '../../entities'
@@ -26,18 +21,16 @@ function Authentication() {
     )
   }
   const verifyAuth = () => {
-    //let isAuth = false
-    const auth = getAuth(getFirebaseApp())
-    return onAuthStateChanged(auth, () => {})
-    // auth.onAuthStateChanged((user) => {
-    //   if (user?.uid) {
-    //     isAuth = true
-    //   } else {
-    //     isAuth = false
-    //   }
-
-    //   return isAuth
-    // })
+    return new Promise(function (resolve, reject) {
+      const auth = getAuth(getFirebaseApp())
+      auth.onAuthStateChanged(function (user) {
+        if (user?.uid) {
+          resolve({ isAuth: true, user })
+        } else {
+          reject({ isAuth: false, user: null })
+        }
+      })
+    })
   }
 
   const logout = () => {

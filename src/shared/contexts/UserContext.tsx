@@ -54,7 +54,6 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     }
     setUser(userData)
     window.localStorage.setItem('userData', JSON.stringify(userData))
-    console.log(userData)
   }
 
   const setLocation = (location: string) => {
