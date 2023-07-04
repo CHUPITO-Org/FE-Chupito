@@ -14,8 +14,8 @@ export const AuthProvider = ({ children }) => {
         type: 'UPDATE_IS_AUTH',
         payload: { isAuth: verifyApiResponse.isAuth },
       })
-    } catch (err) {
-      console.log(err)
+    } catch (error) {
+      console.log(error)
     }
   }
   const [state, dispatch] = useReducer(reducer, initialState)
