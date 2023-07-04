@@ -1,15 +1,23 @@
-import React, { useReducer } from 'react'
+import { useReducer, ReactNode } from 'react'
 import { AuthContext } from './AuthContext'
 import { Authentication } from '../../shared/api'
 import { reducer } from './AuthReducer'
 
-export const AuthProvider = ({ children }) => {
-  const initialState = { isAuth: false, email: '', loadingIsAuth: true }
+type Props = {
+  children: ReactNode
+}
+interface VerifyApiResponse {
+  isAuth: boolean
+  user: {} | null
+}
+
+export const AuthProvider = ({ children }: Props) => {
+  let initialState = { isAuth: false, email: '', loadingIsAuth: true }
   const api = Authentication()
 
   const verifyUser = async () => {
     try {
-      const verifyApiResponse = await api.verifyAuth()
+      const verifyApiResponse: VerifyApiResponse = await api.verifyAuth()
       dispatch({
         type: 'UPDATE_IS_AUTH',
         payload: { isAuth: verifyApiResponse.isAuth },
