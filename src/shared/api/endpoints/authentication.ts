@@ -27,7 +27,6 @@ function Authentication() {
     ) {
       const auth = getAuth(getFirebaseApp())
       auth.onAuthStateChanged(function (user) {
-        //console.log('USER HERE', user)
         if (user?.uid) {
           resolve({ isAuth: true, user })
         } else {

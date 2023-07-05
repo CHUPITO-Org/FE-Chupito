@@ -50,7 +50,6 @@ export default function AppBarWeb({
   const { state } = useAuth()
 
   const history = useHistory()
-  console.log('USER APPBAR', state)
 
   return (
     <>
