@@ -17,12 +17,12 @@ export const AuthProvider = ({ children }: Props) => {
 
   const verifyUser = async () => {
     try {
-      const verifyApiResponse: VerifyApiResponse = await api.verifyAuth()
+      const { isAuth, user }: VerifyApiResponse = await api.verifyAuth()
       dispatch({
         type: 'UPDATE_IS_AUTH',
         payload: {
-          isAuth: verifyApiResponse.isAuth,
-          user: verifyApiResponse.user,
+          isAuth,
+          user,
         },
       })
     } catch (error) {
