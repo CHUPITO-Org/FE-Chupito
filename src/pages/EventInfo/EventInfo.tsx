@@ -1,6 +1,6 @@
 import { useParams, useHistory } from 'react-router-dom'
 import Moment from 'moment'
-import { useContext, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Typography,
   Grid,
@@ -21,8 +21,8 @@ import eventImage from '../../assets/programmingImg.png'
 import image1 from '../../assets/image1.jpg'
 import image2 from '../../assets/image2.jpg'
 import image3 from '../../assets/image3.jpg'
-import { AuthContext } from '../../contexts/Auth/AuthContext'
 import EventsApi from '../../api/events'
+import { useAuth } from '../../hook/useAuth'
 
 const imageItems = [
   {
@@ -122,15 +122,16 @@ export default function EventInfoPage(): JSX.Element {
     id: '',
     eventDate: '',
   })
-
-  const { state, verifyUser } = useContext(AuthContext)
+  const {
+    state: { isAuth },
+  } = useAuth()
 
   const getDatePart = (date: string) => {
     const dateObject = Moment(date, 'YYYY-MM-DD')
     return dateObject.format('D MMM YYYY')
   }
   const subscribedValidationHandler = () => {
-    history.push(`${state.isAuth ? '/event-info' : `/login?eventId=${id}`}`)
+    history.push(`${isAuth ? '/event-info' : `/login?eventId=${id}`}`)
   }
 
   const fetchEventById = async (eventId: string) => {
@@ -143,9 +144,6 @@ export default function EventInfoPage(): JSX.Element {
       console.log(error)
     }
   }
-  useEffect(() => {
-    verifyUser()
-  }, [])
 
   useEffect(() => {
     fetchEventById(id)
@@ -166,12 +164,12 @@ export default function EventInfoPage(): JSX.Element {
           <Button
             variant="contained"
             className={classes.button}
-            disabled={state.isAuth}
+            disabled={isAuth}
             onClick={subscribedValidationHandler}
             data-testid="register-button"
           >
             {' '}
-            {state.isAuth ? 'Subscribed' : 'Register'}
+            {isAuth ? 'Subscribed' : 'Register'}
           </Button>
         </Grid>
       </Grid>

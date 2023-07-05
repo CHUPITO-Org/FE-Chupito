@@ -12,7 +12,7 @@ interface VerifyApiResponse {
 }
 
 export const AuthProvider = ({ children }: Props) => {
-  let initialState = { isAuth: false, email: '', loadingIsAuth: true }
+  let initialState = { isAuth: false, user: {} }
   const api = Authentication()
 
   const verifyUser = async () => {
@@ -20,7 +20,10 @@ export const AuthProvider = ({ children }: Props) => {
       const verifyApiResponse: VerifyApiResponse = await api.verifyAuth()
       dispatch({
         type: 'UPDATE_IS_AUTH',
-        payload: { isAuth: verifyApiResponse.isAuth },
+        payload: {
+          isAuth: verifyApiResponse.isAuth,
+          user: verifyApiResponse.user,
+        },
       })
     } catch (error) {
       console.log(error)
