@@ -34,6 +34,7 @@ export const AuthProvider = ({ children }: Props) => {
       console.log(error)
     }
   }
+
   const setLoginData = ({ isAuth, userUid, email }: VerifyApiResponse) => {
     dispatch({
       type: 'UPDATE_IS_AUTH',

@@ -11,6 +11,7 @@ type Action = {
 export const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case 'UPDATE_IS_AUTH':
+
       const { isAuth, userUid, email } = action.payload
       return {
         ...state,

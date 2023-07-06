@@ -86,6 +86,7 @@ export default function EventsPage(): JSX.Element {
     }
   }, [state.isAuth])
 
+
   if (loading) {
     return <>Loading events</>
   }

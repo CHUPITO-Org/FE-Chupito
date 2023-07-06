@@ -21,6 +21,7 @@ function Authentication() {
     )
   }
   const verifyAuth = () => {
+
     return new Promise<{ isAuth: boolean; userUid: string; email: string }>(
       function (resolve, reject) {
         const auth = getAuth(getFirebaseApp())
