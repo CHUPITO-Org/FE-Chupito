@@ -26,9 +26,7 @@ export const AuthProvider = ({ children }: Props) => {
           userUid,
         },
       })
-      // if (isAuth) {
-      //   getUserInfo(userUid)
-      // }
+      //TODO: Implement method to bring user data
     } catch (error) {
       console.log(error)
     }
@@ -43,7 +41,7 @@ export const AuthProvider = ({ children }: Props) => {
     })
   }
   //TODO: Add endpoint to access user data only
-  //const getUserInfo = async (userUid: string) => {}
+
   const [state, dispatch] = useReducer(reducer, initialState)
 
   return (
