@@ -8,7 +8,6 @@ import NavigationWrapper from '../../components/Navigation/NavigationWrapper'
 import { HeadquarterAPI, ConferenceAPI } from '../../shared/api'
 import { Conference, Headquarter } from '../../shared/entities'
 import { sortAscending } from '../../tools/sorting'
-//import { useAuth } from '../../hook/useAuth'
 
 const useStyles = makeStyles(() =>
   createStyles({
