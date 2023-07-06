@@ -146,7 +146,7 @@ export default function EventInfoPage(): JSX.Element {
   }
 
   useEffect(() => {
-    fetchEventById(id)
+    if (id) fetchEventById(id)
   }, [id])
 
   return (

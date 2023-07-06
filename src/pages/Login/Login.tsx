@@ -25,10 +25,11 @@ export default function LoginPage(): JSX.Element {
       callback()
 
       const eventsApi = new EventsApi()
-      await eventsApi.addAttendees(eventId, {
+      const response = await eventsApi.addAttendees(eventId, {
         email: userName,
         password,
       })
+      console.log('RESPONSE', response)
     } catch (err) {
       console.error(err)
     }

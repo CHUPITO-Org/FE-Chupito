@@ -1,20 +1,20 @@
 type State = {
   isAuth: boolean
-  user: {} | null
+  userUid: string
 }
 type Action = {
   type: 'UPDATE_IS_AUTH'
-  payload: { isAuth: boolean; user: {} | null }
+  payload: { isAuth: boolean; userUid: string }
 }
 
 export const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case 'UPDATE_IS_AUTH':
-      const { isAuth, user } = action.payload
+      const { isAuth, userUid } = action.payload
       return {
         ...state,
         isAuth,
-        user,
+        userUid,
       }
 
     default:
