@@ -50,7 +50,7 @@ export default function AppBarWeb({
   const { state } = useAuth()
 
   const history = useHistory()
-
+  console.log(state)
   return (
     <>
       <AppBar position="fixed">

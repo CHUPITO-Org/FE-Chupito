@@ -71,7 +71,7 @@ export default function AppBarMobile({ version }: AppBarMobileProps) {
           </IconButton>
           {state.isAuth ? (
             <Typography className={classes.userEmail} variant="caption">
-              {state.user?.email}
+              username
             </Typography>
           ) : (
             <Button variant="contained" onClick={() => history.push('/login')}>
