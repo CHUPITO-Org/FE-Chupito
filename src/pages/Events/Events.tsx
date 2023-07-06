@@ -83,7 +83,6 @@ export default function EventsPage(): JSX.Element {
       fetchEventsAuth()
     } else {
       fetchEvents()
-      console.log('EFFECT', state.isAuth)
     }
   }, [state.isAuth])
 
