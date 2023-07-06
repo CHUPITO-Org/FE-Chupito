@@ -42,9 +42,8 @@ export const AuthProvider = ({ children }: Props) => {
       },
     })
   }
-  const getUserInfo = async (userUid: string) => {
-    //TODO: Add endpoint to access user data only
-  }
+  //TODO: Add endpoint to access user data only
+  const getUserInfo = async (userUid: string) => {}
   const [state, dispatch] = useReducer(reducer, initialState)
 
   return (

@@ -26,8 +26,9 @@ export default class Events extends baseRequest {
     return response.data.data
   }
   verifyUserEventSubscribed = async (id) => {
-    const response = await this.get(`${this.userMethod}/${this.method}/${id}`)
-    return response.data.data
+    const { userMethod, method } = this
+    const { data } = await this.get(`${userMethod}/${method}/${id}`)
+    return data.data
   }
 
   add = (event) => {
