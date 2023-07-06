@@ -2,7 +2,7 @@ import { useReducer, ReactNode } from 'react'
 import { AuthContext } from './AuthContext'
 import { Authentication } from '../../shared/api'
 import { reducer } from './AuthReducer'
-import Users from '../../api/users'
+//import Users from '../../api/users'
 
 type Props = {
   children: ReactNode
@@ -33,20 +33,22 @@ export const AuthProvider = ({ children }: Props) => {
       console.log(error)
     }
   }
+  const setLoginData = ({ isAuth, userUid }: VerifyApiResponse) => {
+    dispatch({
+      type: 'UPDATE_IS_AUTH',
+      payload: {
+        isAuth,
+        userUid,
+      },
+    })
+  }
   const getUserInfo = async (userUid: string) => {
-    const usersApi = new Users()
-
-    try {
-      const userResponse = await usersApi.getUserEventById(userUid)
-      console.log('RESPONSE USER AUTH', userResponse)
-    } catch (err) {
-      console.log(err)
-    }
+    //TODO: Add endpoint to access user data only
   }
   const [state, dispatch] = useReducer(reducer, initialState)
 
   return (
-    <AuthContext.Provider value={{ state, verifyUser }}>
+    <AuthContext.Provider value={{ state, verifyUser, setLoginData }}>
       {children}
     </AuthContext.Provider>
   )

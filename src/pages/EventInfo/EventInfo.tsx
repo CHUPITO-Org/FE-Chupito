@@ -116,6 +116,7 @@ export default function EventInfoPage(): JSX.Element {
   const classes = useStyles()
   const history = useHistory()
   const { id } = useParams<{ id: string }>() as { id: string }
+  const [isSubscribed, setIsSubscribed] = useState(false)
 
   const [eventDetails, setEventDetails] = useState<EventInfoPageProps>({
     name: '',
@@ -144,10 +145,25 @@ export default function EventInfoPage(): JSX.Element {
       console.log(error)
     }
   }
+  const fetchVerifySubscription = async (id: string) => {
+    try {
+      const api = new EventsApi()
+      const response = await api.verifyUserEventSubscribed(id)
+      setIsSubscribed(response.attendanceConfirmed)
+    } catch (err) {
+      setIsSubscribed(false)
+      console.log(err)
+    }
+  }
 
   useEffect(() => {
-    if (id) fetchEventById(id)
-  }, [id])
+    if (id) {
+      fetchEventById(id)
+    }
+    if (isAuth) {
+      fetchVerifySubscription(id)
+    }
+  }, [id, isAuth])
 
   return (
     <>
@@ -164,12 +180,12 @@ export default function EventInfoPage(): JSX.Element {
           <Button
             variant="contained"
             className={classes.button}
-            disabled={isAuth}
+            disabled={isSubscribed}
             onClick={subscribedValidationHandler}
             data-testid="register-button"
           >
             {' '}
-            {isAuth ? 'Subscribed' : 'Register'}
+            {isSubscribed ? 'Subscribed' : 'Register'}
           </Button>
         </Grid>
       </Grid>
