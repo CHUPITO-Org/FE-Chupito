@@ -25,7 +25,7 @@ function Authentication() {
     return new Promise<{ isAuth: boolean; userUid: string; email: string }>(
       (resolve, reject) => {
         const auth = getAuth(getFirebaseApp())
-        auth.onAuthStateChanged(function (user) {
+        auth.onAuthStateChanged((user) => {
           if (user?.uid) {
             resolve({
               isAuth: true,
