@@ -4,7 +4,6 @@ import config from '../../../environment/environment'
 
 function ConferenceAPI() {
   const getAll = async (): Promise<Conference[]> => {
-    console.log('conference api', config.eventCollectionName)
     const { data: myData } = await requests.get(config.eventCollectionName)
 
     const { data: eventData } = myData
