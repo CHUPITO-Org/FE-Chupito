@@ -21,16 +21,16 @@ function Authentication() {
     )
   }
   const verifyAuth = () => {
-
     return new Promise<{ isAuth: boolean; userUid: string; email: string }>(
       (resolve, reject) => {
         const auth = getAuth(getFirebaseApp())
         auth.onAuthStateChanged((user) => {
-          if (user?.uid) {
+          const { uid, email } = user ?? {}
+          if (uid) {
             resolve({
               isAuth: true,
-              userUid: user.uid,
-              email: user.email as string,
+              userUid: uid,
+              email: email as string,
             })
           } else {
             reject({ isAuth: false, userUid: '', email: '' })
